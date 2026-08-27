@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Biochemistry - الملخص المدمج</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== BASE ===== */
+        :root {
+            --bg1: #0a0e1a;
+            --bg2: #141e33;
+            --bg3: #1a2a45;
+            --primary: #00d4ff;
+            --primary-dark: #0099cc;
+            --accent: #facc15;
+            --danger: #f87171;
+            --success: #34d399;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text: #e8edf5;
+            --muted: #94a3b8;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 30px rgba(0, 212, 255, 0.06);
+            --radius: 16px;
+            --header-bg: rgba(255, 255, 255, 0.03);
+            --header-border: rgba(255, 255, 255, 0.04);
+            --footer-border: rgba(255, 255, 255, 0.03);
+            --table-header-bg: rgba(0, 212, 255, 0.08);
+            --card-title-bg: rgba(0, 212, 255, 0.06);
+            --highlight-bg: #facc15;
+            --highlight-text: #0f172a;
+        }
+
+        [data-theme="light"] {
+            --bg1: #f0f4f8;
+            --bg2: #e2e8f0;
+            --bg3: #cbd5e1;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 0, 0, 0.1);
+            --text: #0f172a;
+            --muted: #475569;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --glow: 0 0 30px rgba(0, 212, 255, 0.02);
+            --header-bg: rgba(255, 255, 255, 0.7);
+            --header-border: rgba(0, 0, 0, 0.04);
+            --footer-border: rgba(0, 0, 0, 0.04);
+            --table-header-bg: rgba(0, 212, 255, 0.12);
+            --card-title-bg: rgba(0, 212, 255, 0.08);
+            --highlight-bg: #facc15;
+            --highlight-text: #0f172a;
+        }
+
+        .highlight-text {
+            background-color: var(--highlight-bg);
+            color: var(--highlight-text);
+            padding: 0 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, 'Cairo', sans-serif;
+            background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3), #0f1a2b);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            min-height: 100vh;
+            color: var(--text);
+            padding: 16px 8px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            transition: background 0.4s ease;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .app { max-width: 1100px; width: 100%; }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 16px 16px;
+            background: var(--header-bg);
+            border-radius: 20px;
+            border: 1px solid var(--header-border);
+            backdrop-filter: blur(4px);
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 4px 25px rgba(0, 212, 255, 0.15);
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .header h1 { color: #0f172a; text-shadow: none; }
+        .header h1 .highlight {
+            background: linear-gradient(135deg, var(--primary), #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .sub {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+        .header .creator {
+            color: var(--muted);
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+        .header .creator i { color: var(--danger); }
+        .header .creator .name { color: var(--text); font-weight: 700; }
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+        }
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.08);
+            transform: scale(1.05);
+        }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+        [data-theme="light"] .theme-toggle:hover {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* ===== TABS ===== */
+        .tabs-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+            justify-content: center;
+        }
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            padding: 8px 14px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .tab-btn:hover { border-color: var(--primary); color: var(--text); }
+        .tab-btn.active {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.08);
+            color: var(--primary);
+        }
+        .tab-btn .en { display: block; font-size: 0.7rem; }
+        .tab-btn .ar { display: block; font-size: 0.55rem; opacity: 0.7; }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow), var(--glow);
+            padding: 18px 14px;
+            margin-bottom: 16px;
+            transition: background 0.3s ease, border 0.3s ease;
+            display: none;
+        }
+        .card.active { display: block; }
+        .card h2 {
+            font-size: 1.3rem;
+            color: var(--text);
+            border-right: 4px solid var(--primary);
+            padding-right: 12px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        .card h2 i { color: var(--accent); margin-left: 6px; }
+
+        /* ===== SLIDES ===== */
+        .slide-container {
+            position: relative;
+            min-height: 300px;
+        }
+        .slide {
+            display: none;
+            animation: fadeSlide 0.3s ease;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        .slide-progress .bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            margin: 0 12px;
+            overflow: hidden;
+        }
+        .slide-progress .bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #818cf8);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        .slide-progress .count {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .slide-nav .btn-nav {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 80px;
+            text-align: center;
+        }
+        .slide-nav .btn-nav:hover:not(:disabled) {
+            background: rgba(0, 212, 255, 0.08);
+            border-color: var(--primary);
+        }
+        .slide-nav .btn-nav:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+        .slide-nav .btn-nav.primary {
+            background: var(--primary);
+            color: #0a0e1a;
+            border-color: var(--primary);
+        }
+        .slide-nav .btn-nav.primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        [data-theme="light"] .slide-nav .btn-nav {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+        [data-theme="light"] .slide-nav .btn-nav:hover:not(:disabled) {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* ===== CARDS GRID ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 14px 14px 12px;
+            transition: border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .topic-card:hover {
+            border-color: var(--primary);
+        }
+
+        .topic-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--card-title-bg);
+        }
+        .topic-card .card-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            line-height: 1.4;
+            flex: 1;
+        }
+        .topic-card .card-title-ar {
+            color: var(--muted);
+            font-weight: 400;
+            display: none;
+        }
+        .topic-card .card-title-ar.show {
+            display: inline;
+        }
+        .topic-card .card-title-en {
+            display: inline;
+        }
+        .topic-card .card-title-en.hidden {
+            display: none;
+        }
+
+        .topic-card .translate-btn {
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 0.6rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+        .topic-card .translate-btn:hover {
+            background: rgba(0, 212, 255, 0.18);
+            border-color: var(--primary);
+        }
+        .topic-card .translate-btn.active {
+            background: rgba(0, 212, 255, 0.18);
+            border-color: var(--primary);
+        }
+
+        .topic-card .card-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+        .topic-card .card-items li {
+            padding: 4px 0 4px 0;
+            line-height: 1.6;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        [data-theme="light"] .topic-card .card-items li {
+            border-bottom-color: rgba(0, 0, 0, 0.04);
+        }
+        .topic-card .card-items li:last-child {
+            border-bottom: none;
+        }
+
+        .topic-card .item-en {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            display: block;
+            text-align: left;
+            direction: ltr;
+        }
+        .topic-card .item-ar {
+            color: var(--muted);
+            font-size: 0.82rem;
+            line-height: 1.6;
+            text-align: right;
+            direction: rtl;
+            display: none;
+            margin-top: 2px;
+            padding-right: 8px;
+            border-right: 2px solid rgba(0, 212, 255, 0.2);
+        }
+        .topic-card .item-ar.show {
+            display: block;
+        }
+
+        .topic-card .card-items.numbered {
+            counter-reset: item-counter;
+        }
+        .topic-card .card-items.numbered li {
+            padding-right: 28px;
+            position: relative;
+            counter-increment: item-counter;
+        }
+        .topic-card .card-items.numbered li::before {
+            content: counter(item-counter) "-";
+            position: absolute;
+            right: 2px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .topic-card .card-items.simple li {
+            padding-right: 0;
+        }
+        .topic-card .card-items.simple li::before {
+            display: none;
+        }
+
+        /* ===== TABLES ===== */
+        .info-table-wrap {
+            overflow-x: auto;
+            margin: 12px 0;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            grid-column: 1 / -1;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            min-width: 500px;
+        }
+        .info-table th {
+            background: var(--table-header-bg);
+            color: var(--primary);
+            padding: 8px 6px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            font-weight: 700;
+        }
+        .info-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--card-border);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .info-table tr:last-child td { border-bottom: none; }
+        .info-table .ar-text {
+            border-right: none;
+            padding-right: 0;
+            margin-top: 2px;
+            font-size: 0.78rem;
+            display: block;
+            color: var(--muted);
+        }
+        .info-table .en-text { font-size: 0.85rem; }
+        .info-table.two-col td {
+            vertical-align: middle;
+        }
+        .info-table.two-col .col-header {
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            background: var(--table-header-bg);
+        }
+
+        @media (max-width: 600px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .info-table { font-size: 0.72rem; min-width: 350px; }
+            .info-table th, .info-table td { padding: 4px 3px; }
+            .topic-card .card-title { font-size: 0.85rem; }
+            .topic-card .item-en { font-size: 0.85rem; }
+            .topic-card .item-ar { font-size: 0.78rem; }
+        }
+        @media (min-width: 601px) and (max-width: 900px) {
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 901px) {
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1200px) {
+            .cards-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .footer-credit {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.12);
+            font-size: 0.7rem;
+            margin-top: 24px;
+            padding: 10px 0;
+            border-top: 1px solid var(--footer-border);
+        }
+        [data-theme="light"] .footer-credit { color: rgba(0, 0, 0, 0.2); }
+        .footer-credit .name { color: var(--primary); font-weight: 600; }
+
+        @media (max-width: 768px) {
+            body { padding: 8px 4px; }
+            .header { padding: 12px 10px; }
+            .header h1 { font-size: 1.4rem; }
+            .header .sub { font-size: 0.7rem; }
+            .header .creator { font-size: 0.65rem; }
+            .theme-toggle { width: 36px; height: 36px; font-size: 1rem; }
+            .tab-btn { padding: 6px 10px; font-size: 0.6rem; }
+            .tab-btn .en { font-size: 0.6rem; }
+            .tab-btn .ar { font-size: 0.5rem; }
+            .card { padding: 14px 10px; }
+            .card h2 { font-size: 1.1rem; padding-right: 8px; }
+            .slide-nav .btn-nav { padding: 8px 12px; font-size: 0.8rem; min-width: 60px; }
+            .topic-card { padding: 10px 10px; }
+        }
+
+        .topic-card.full-width {
+            grid-column: 1 / -1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <h1>
+                        <span class="highlight">Biochemistry</span>
+                    </h1>
+                    <div class="sub">Medical Biochemistry · الكيمياء الحيوية الطبية</div>
+                    <div class="creator"><i class="fas fa-user-graduate"></i> Created by <span class="name">MR. YASSIN THARWAT</span></div>
+                </div>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="تبديل الوضع">🌙</button>
+            </div>
+        </div>
+
+        <div class="tabs-wrap" id="tabsContainer"></div>
+        <div id="sectionsContainer"></div>
+        <div class="footer-credit">
+            Created by <span class="name">MR. YASSIN THARWAT</span>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        //  THEME
+        // ================================================================
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            document.getElementById('themeToggle').textContent = theme === 'light' ? '🌙' : '☀️';
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        function toggleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+
+        // ================================================================
+        //  SLIDE SYSTEM
+        // ================================================================
+        let slideState = {};
+
+        function initSlideState(partId, totalSlides) {
+            slideState[partId] = { current: 0, total: totalSlides };
+        }
+
+        function renderSlide(partId, containerId) {
+            const state = slideState[partId];
+            if (!state) return;
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const slides = container.querySelectorAll('.slide');
+            slides.forEach((s, i) => {
+                s.classList.toggle('active', i === state.current);
+            });
+            const progressBar = container.querySelector('.slide-progress .fill');
+            const countSpan = container.querySelector('.slide-progress .count');
+            if (progressBar) {
+                const pct = ((state.current + 1) / state.total) * 100;
+                progressBar.style.width = pct + '%';
+            }
+            if (countSpan) {
+                countSpan.textContent = `${state.current + 1} / ${state.total}`;
+            }
+            const prevBtn = container.querySelector('.btn-nav.prev');
+            const nextBtn = container.querySelector('.btn-nav.next');
+            if (prevBtn) prevBtn.disabled = state.current === 0;
+            if (nextBtn) nextBtn.disabled = state.current === state.total - 1;
+        }
+
+        function goToSlide(partId, containerId, index) {
+            const state = slideState[partId];
+            if (!state) return;
+            if (index < 0) index = 0;
+            if (index >= state.total) index = state.total - 1;
+            state.current = index;
+            renderSlide(partId, containerId);
+        }
+
+        // ================================================================
+        //  HELPERS
+        // ================================================================
+        function createSlideHTML(title, cardsHTML) {
+            return `
+                    <div class="slide">
+                        <h3 style="font-size:1.1rem; color:var(--primary); margin-bottom:12px; border-right:3px solid var(--primary); padding-right:10px;">${title}</h3>
+                        <div class="cards-grid">${cardsHTML}</div>
+                    </div>
+                `;
+        }
+
+        function card(title, items, arTitle = '', hasTranslate = true) {
+            const cardId = 'c' + Math.random().toString(36).substr(2, 8);
+            const itemsHTML = items.map((item) => {
+                const en = item.en || item;
+                const ar = item.ar || '';
+                return `
+                    <li>
+                        <span class="item-en">${en}</span>
+                        <span class="item-ar">${ar}</span>
+                    </li>
+                `;
+            }).join('');
+
+            const listClass = items.some(i => i.en && i.en.match(/^\d/)) ? 'card-items numbered' : 'card-items simple';
+
+            const translateBtn = hasTranslate ? `<button class="translate-btn" data-card="${cardId}" onclick="toggleCardTranslation('${cardId}')">📖 ترجمة هذا الجزء</button>` : '';
+
+            return `
+                <div class="topic-card" data-card="${cardId}">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <span class="card-title-en">${title}</span>
+                            <span class="card-title-ar" id="${cardId}-title-ar">${arTitle}</span>
+                        </span>
+                        ${translateBtn}
+                    </div>
+                    <ul class="${listClass}">
+                        ${itemsHTML}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function cardWithItems(title, items, arTitle = '') {
+            const formatted = items.map(item => {
+                if (typeof item === 'string') {
+                    return { en: item, ar: '' };
+                }
+                return item;
+            });
+            return card(title, formatted, arTitle, true);
+        }
+
+        function tableCard(title, tableHTML, arTitle = '') {
+            const cardId = 'tc' + Math.random().toString(36).substr(2, 8);
+            return `
+                <div class="topic-card full-width" data-card="${cardId}">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <span class="card-title-en">${title}</span>
+                            <span class="card-title-ar" id="${cardId}-title-ar">${arTitle}</span>
+                        </span>
+                    </div>
+                    <div class="info-table-wrap">${tableHTML}</div>
+                </div>
+            `;
+        }
+
+        function cell(en, ar) {
+            return `<span class="en-text">${en}</span><span class="ar-text">${ar}</span>`;
+        }
+
+        function toggleCardTranslation(cardId) {
+            const card = document.querySelector(`.topic-card[data-card="${cardId}"]`);
+            if (!card) return;
+            const arItems = card.querySelectorAll('.item-ar');
+            const titleAr = document.getElementById(`${cardId}-title-ar`);
+            const titleEn = card.querySelector('.card-title-en');
+            const btn = card.querySelector('.translate-btn');
+            
+            const isVisible = arItems.length > 0 && arItems[0].classList.contains('show');
+
+            arItems.forEach(el => {
+                el.classList.toggle('show');
+            });
+
+            if (titleAr) {
+                titleAr.classList.toggle('show');
+                if (titleEn) {
+                    titleEn.classList.toggle('hidden');
+                }
+            }
+
+            if (btn) {
+                btn.textContent = isVisible ? '📖 ترجمة هذا الجزء' : '✕ إخفاء الترجمة';
+                btn.classList.toggle('active');
+            }
+        }
+
+        // ================================================================
+        //  SLIDES DATA — COMPLETE BIOCHEMISTRY (UPDATED)
+        // ================================================================
+
+        // ================================================================
+        // 1. VITAMINS
+        // ================================================================
+        const vitaminsData = {
+            titleEn: 'Vitamins',
+            titleAr: 'الفيتامينات',
+            slides: [
+                {
+                    title: 'Vitamin Characters and Classification · خصائص الفيتامينات وتصنيفها',
+                    cards: [
+                        cardWithItems('Vitamin characters:', [
+                            { en: '<span class="highlight-text">Essential</span> organic compounds for normal health and growth', ar: 'مركبات عضوية <span class="highlight-text">أساسية</span> للصحة والنمو الطبيعي' },
+                            { en: 'Supplied in diet in <span class="highlight-text">small amounts</span>; deficiency causes disease', ar: 'تُمد في النظام الغذائي بكميات <span class="highlight-text">صغيرة</span>؛ نقصها يسبب مرضاً' },
+                            { en: 'Act as <span class="highlight-text">coenzymes</span>', ar: 'تعمل كـ <span class="highlight-text">أنزيمات مساعدة</span>' },
+                            { en: 'Do not enter tissue structure (unlike carbs, fats, proteins)', ar: 'لا تدخل في تركيب الأنسجة (على عكس الكربوهيدرات والدهون والبروتينات)' },
+                            { en: 'Not oxidized for energy production', ar: 'لا تتأكسد لإنتاج الطاقة' }
+                        ], 'خصائص الفيتامينات:'),
+                        cardWithItems('Classification by solubility:', [
+                            { en: '<span class="highlight-text">Fat-soluble</span>: A, D, E, K', ar: '<span class="highlight-text">الذائبة في الدهون</span>: A, D, E, K' },
+                            { en: '<span class="highlight-text">Water-soluble</span>: B-complex, C', ar: '<span class="highlight-text">الذائبة في الماء</span>: فيتامينات ب المركبة، C' }
+                        ], 'التصنيف حسب الذوبانية:')
+                    ]
+                },
+                {
+                    title: 'Vitamin A (Retinol) · فيتامين أ (الريتينول)',
+                    cards: [
+                        cardWithItems('Chemistry and sources:', [
+                            { en: 'Forms: <span class="highlight-text">retinol, retinal, retinoic acid</span>', ar: 'الأشكال: <span class="highlight-text">ريتينول، ريتينال، حمض الريتينويك</span>' },
+                            { en: 'Provitamin: <span class="highlight-text">carotenoids</span> (carrots, tomatoes, leafy veg.)', ar: 'الطليعة: <span class="highlight-text">كاروتينات</span> (جزر، طماطم، خضروات ورقية)' },
+                            { en: 'Animal sources: <span class="highlight-text">liver, milk, butter, egg yolk</span>', ar: 'مصادر حيوانية: <span class="highlight-text">كبد، حليب، زبدة، صفار البيض</span>' },
+                            { en: 'Rich in <span class="highlight-text">fish liver oils</span>', ar: 'غني في <span class="highlight-text">زيوت كبد الأسماك</span>' }
+                        ], 'الكيمياء والمصادر:'),
+                        cardWithItems('Functions:', [
+                            { en: 'Vision: component of <span class="highlight-text">photosensitive pigments</span>', ar: 'الرؤية: مكون من <span class="highlight-text">أصباغ حساسة للضوء</span>' },
+                            { en: 'Retinoic acid: <span class="highlight-text">glycoprotein synthesis, growth, reproduction, anticancer, immunostimulant</span>', ar: 'حمض الريتينويك: <span class="highlight-text">تخليق البروتين السكري، نمو، تكاثر، مضاد للسرطان، محفز للمناعة</span>' },
+                            { en: '<span class="highlight-text">Antioxidant</span> activity', ar: 'نشاط <span class="highlight-text">مضاد للأكسدة</span>' }
+                        ], 'الوظائف:'),
+                        cardWithItems('Deficiency and excess:', [
+                            { en: 'Deficiency: <span class="highlight-text">night blindness</span>, growth retardation, rough skin (hyperkeratosis), <span class="highlight-text">increased liability to cancer and anemia</span>, <span class="highlight-text">roughness of mucous membranes</span> of urinary, genital, GI & respiratory tracts', ar: 'النقص: <span class="highlight-text">العمى الليلي</span>، تأخر النمو، جلد خشن (فرط التقرن)، <span class="highlight-text">زيادة القابلية للسرطان والأنيميا</span>، <span class="highlight-text">خشونة الأغشية المخاطية</span> في الجهاز البولي، التناسلي، الهضمي والتنفسي' },
+                            { en: 'Excess (hypervitaminosis): <span class="highlight-text">headache, nausea, bone pain, hair loss</span>', ar: 'الزيادة (فرط الفيتامين): <span class="highlight-text">صداع، غثيان، ألم عظام، تساقط شعر</span>' }
+                        ], 'النقص والزيادة:')
+                    ]
+                },
+                {
+                    title: 'Vitamin D (Cholecalciferol) · فيتامين د (كوليكالسيفيرول)',
+                    cards: [
+                        cardWithItems('Sources and activation:', [
+                            { en: 'Provitamin: <span class="highlight-text">7-dehydrocholesterol</span> is formed in <span class="highlight-text">intestinal mucosa</span> from cholesterol then passes to skin where <span class="highlight-text">UV rays</span> convert it into cholecalciferol (D3)', ar: 'الطليعة: يتكون <span class="highlight-text">7-ديهيدروكوليسترول</span> في <span class="highlight-text">الغشاء المخاطي المعوي</span> من الكوليسترول ثم يمر إلى الجلد حيث تحوله <span class="highlight-text">الأشعة فوق البنفسجية</span> إلى كوليكالسيفيرول (D3)' },
+                            { en: 'Active form: <span class="highlight-text">1,25-dihydroxy-D3 (Calcitriol)</span>', ar: 'الشكل النشط: <span class="highlight-text">1,25-ثنائي هيدروكسي D3 (كالسيتريول)</span>' }
+                        ], 'المصادر والتنشيط:'),
+                        cardWithItems('Functions (as hormone):', [
+                            { en: 'Intestine: increases <span class="highlight-text">calcium and phosphate absorption</span>', ar: 'الأمعاء: يزيد <span class="highlight-text">امتصاص الكالسيوم والفوسفات</span>' },
+                            { en: 'Bone: <span class="highlight-text">mobilizes calcium and phosphate</span>', ar: 'العظام: <span class="highlight-text">يعبئ الكالسيوم والفوسفات</span>' },
+                            { en: 'Kidney: enhances <span class="highlight-text">reabsorption of Ca2+ and phosphate</span>', ar: 'الكلى: يعزز <span class="highlight-text">إعادة امتصاص Ca2+ والفوسفات</span>' }
+                        ], 'الوظائف (كهرمون):'),
+                        cardWithItems('Deficiency and toxicity:', [
+                            { en: 'Deficiency: <span class="highlight-text">rickets</span> in children, <span class="highlight-text">osteomalacia</span> in adults', ar: 'النقص: <span class="highlight-text">الكساح</span> في الأطفال، <span class="highlight-text">لين العظام</span> في البالغين' },
+                            { en: 'Causes: low intake, low sunlight, fat malabsorption, <span class="highlight-text">severe liver and kidney diseases</span>', ar: 'الأسباب: نقص المدخول، قلة الشمس، سوء امتصاص الدهون، <span class="highlight-text">أمراض الكبد والكلى الشديدة</span>' },
+                            { en: 'Toxicity: <span class="highlight-text">hypercalcemia</span> → kidney stones, nausea, hypertension', ar: 'السمية: <span class="highlight-text">فرط كالسيوم الدم</span> → حصوات كلوية، غثيان، ارتفاع ضغط الدم' }
+                        ], 'النقص والسمية:')
+                    ]
+                },
+                {
+                    title: 'Vitamin E (Anti-sterility) · فيتامين هـ (مضاد للعقم)',
+                    cards: [
+                        cardWithItems('Sources and functions:', [
+                            { en: 'Sources: <span class="highlight-text">vegetable oils</span> (wheat germ, olive, coconut)', ar: 'المصادر: <span class="highlight-text">زيوت نباتية</span> (جرثومة القمح، زيتون، جوز الهند)' },
+                            { en: 'Functions: <span class="highlight-text">antioxidant</span>, prevents hemolytic anemia, antisterility (in animals)', ar: 'الوظائف: <span class="highlight-text">مضاد أكسدة</span>، يمنع الأنيميا الانحلالية، مضاد للعقم (في الحيوانات)' }
+                        ], 'المصادر والوظائف:'),
+                        cardWithItems('Deficiency causes and manifestations:', [
+                            { en: 'Causes: <span class="highlight-text">fat malabsorption</span>, <span class="highlight-text">intestinal resection</span>, <span class="highlight-text">chronic liver diseases</span>, low intake', ar: 'الأسباب: <span class="highlight-text">سوء امتصاص الدهون</span>، <span class="highlight-text">استئصال الأمعاء</span>، <span class="highlight-text">أمراض الكبد المزمنة</span>، نقص المدخول' },
+                            { en: 'Manifestations: <span class="highlight-text">anemia, sterility, CNS changes, cancer stomach</span>', ar: 'المظاهر: <span class="highlight-text">أنيميا، عقم، تغيرات بالجهاز العصبي المركزي، سرطان المعدة</span>' }
+                        ], 'أسباب النقص ومظاهره:')
+                    ]
+                },
+                {
+                    title: 'Vitamin K (Anti-haemorrhagic) · فيتامين ك (مضاد للنزيف)',
+                    cards: [
+                        cardWithItems('Forms and sources:', [
+                            { en: 'Natural: <span class="highlight-text">K1 (plants)</span>, <span class="highlight-text">K2 (intestinal bacteria)</span>', ar: 'الطبيعي: <span class="highlight-text">K1 (نباتات)</span>، <span class="highlight-text">K2 (بكتيريا الأمعاء)</span>' },
+                            { en: 'Synthetic: <span class="highlight-text">K3 (Menadione, water-soluble)</span>', ar: 'الصناعي: <span class="highlight-text">K3 (ميناديون، ذائب في الماء)</span>' },
+                            { en: 'Sources: <span class="highlight-text">spinach, cauliflower, cabbage</span>; intestinal bacteria', ar: 'المصادر: <span class="highlight-text">سبانخ، قرنبيط، كرنب</span>؛ بكتيريا الأمعاء' }
+                        ], 'الأشكال والمصادر:'),
+                        cardWithItems('Functions and deficiency:', [
+                            { en: 'Functions: <span class="highlight-text">synthesis of clotting factors</span> (antihemorrhagic), activates osteocalcin in bone', ar: 'الوظائف: <span class="highlight-text">تخليق عوامل التخثر</span> (مضاد للنزيف)، ينشط الأوستيوكالسين في العظام' },
+                            { en: 'Deficiency causes: <span class="highlight-text">antibiotics</span>, fat malabsorption, dicumarol, liver disease', ar: 'أسباب النقص: <span class="highlight-text">مضادات حيوية</span>، سوء امتصاص الدهون، ديكومارول، أمراض الكبد' },
+                            { en: 'Effect: <span class="highlight-text">hemorrhagic manifestations</span>', ar: 'التأثير: <span class="highlight-text">مظاهر نزفية</span>' },
+                            { en: 'Note: Deficiency <span class="highlight-text">does not occur</span> as a result of deficient intake because widely distributed in foods and synthesized by bacteria in large intestine', ar: 'ملاحظة: النقص <span class="highlight-text">لا يحدث</span> نتيجة نقص المدخول لأنه موزع على نطاق واسع في الأطعمة ويُصنع بواسطة البكتيريا في الأمعاء الغليظة' }
+                        ], 'الوظائف والنقص:')
+                    ]
+                },
+                {
+                    title: 'Water-soluble Vitamins · الفيتامينات الذائبة في الماء',
+                    cards: [
+                        cardWithItems('This group includes:', [
+                            { en: '<span class="highlight-text">Vitamin C</span>', ar: '<span class="highlight-text">فيتامين ج</span>' },
+                            { en: '<span class="highlight-text">B-complex</span>', ar: '<span class="highlight-text">فيتامينات ب المركبة</span>' }
+                        ], 'تشمل هذه المجموعة:')
+                    ]
+                },
+                {
+                    title: 'Vitamin C (L-Ascorbic Acid) · فيتامين ج (حمض الأسكوربيك)',
+                    cards: [
+                        cardWithItems('Sources and functions:', [
+                            { en: 'Sources: <span class="highlight-text">citrus fruits, melon, strawberry, guava</span>', ar: 'المصادر: <span class="highlight-text">حمضيات، بطيخ، فراولة، جوافة</span>' },
+                            { en: 'Functions: <span class="highlight-text">collagen formation</span> (wound healing, bone), <span class="highlight-text">antioxidant</span>, iron absorption, folic acid activation', ar: 'الوظائف: <span class="highlight-text">تكوين الكولاجين</span> (التئام الجروح، العظام)، <span class="highlight-text">مضاد أكسدة</span>، امتصاص الحديد، تنشيط حمض الفوليك' },
+                            { en: '<span class="highlight-text">Biosynthesis of adrenaline and noradrenaline</span>, <span class="highlight-text">formation of carnitine</span>, needed for <span class="highlight-text">bile acid formation</span> from cholesterol', ar: '<span class="highlight-text">تخليق الأدرينالين والنورأدرينالين</span>، <span class="highlight-text">تكوين الكارنيتين</span>، ضروري <span class="highlight-text">لتكوين الأحماض الصفراوية</span> من الكوليسترول' },
+                            { en: '<span class="highlight-text">Lowers the risk for gastric and esophageal cancers</span>, <span class="highlight-text">ameliorates common cold</span> symptoms', ar: '<span class="highlight-text">يقلل خطر سرطان المعدة والمريء</span>، <span class="highlight-text">يخفف أعراض نزلات البرد</span>' }
+                        ], 'المصادر والوظائف:'),
+                        cardWithItems('Deficiency (Scurvy):', [
+                            { en: 'Causes: <span class="highlight-text">chronic disease, alcoholism, smoking, contraceptives</span>', ar: 'الأسباب: <span class="highlight-text">أمراض مزمنة، إدمان كحول، تدخين، حبوب منع الحمل</span>' },
+                            { en: 'Manifestations: <span class="highlight-text">bleeding gums, loose teeth, bruising, delayed wound healing, anemia, decreased immunocompetence</span>', ar: 'المظاهر: <span class="highlight-text">نزيف لثة، أسنان متخلخلة، كدمات، تأخر التئام الجروح، أنيميا، انخفاض الكفاءة المناعية</span>' }
+                        ], 'النقص (الأسقربوط):')
+                    ]
+                },
+                {
+                    title: 'Vitamin B Complex · فيتامينات ب المركبة',
+                    cards: [
+                        cardWithItems('Members:', [
+                            { en: '<span class="highlight-text">B1</span> (Thiamin)', ar: '<span class="highlight-text">B1</span> (ثيامين)' },
+                            { en: '<span class="highlight-text">B2</span> (Riboflavin)', ar: '<span class="highlight-text">B2</span> (ريبوفلافين)' },
+                            { en: '<span class="highlight-text">Niacin</span> (PPF)', ar: '<span class="highlight-text">نياسين</span> (PPF)' },
+                            { en: '<span class="highlight-text">B6</span> (Pyridoxine)', ar: '<span class="highlight-text">B6</span> (بيريدوكسين)' },
+                            { en: '<span class="highlight-text">Pantothenic acid</span>', ar: '<span class="highlight-text">حمض البانتوثينيك</span>' },
+                            { en: '<span class="highlight-text">Biotin</span>', ar: '<span class="highlight-text">بيوتين</span>' },
+                            { en: '<span class="highlight-text">Folic acid</span>', ar: '<span class="highlight-text">حمض الفوليك</span>' },
+                            { en: '<span class="highlight-text">B12</span>', ar: '<span class="highlight-text">B12</span>' }
+                        ], 'الأعضاء:'),
+                        cardWithItems('General characters:', [
+                            { en: '<span class="highlight-text">Water-soluble</span>', ar: '<span class="highlight-text">ذائبة في الماء</span>' },
+                            { en: 'Present in same sources (<span class="highlight-text">whole grains</span>)', ar: 'موجودة في نفس المصادر (<span class="highlight-text">الحبوب الكاملة</span>)' },
+                            { en: 'Serve as <span class="highlight-text">coenzymes</span>', ar: 'تعمل كـ <span class="highlight-text">أنزيمات مساعدة</span>' },
+                            { en: 'Minimal tissue stores; <span class="highlight-text">absorbed in intestine</span>; <span class="highlight-text">toxic effects uncommon</span>', ar: 'مخزون نسيجي ضئيل؛ <span class="highlight-text">تمتص في الأمعاء</span>؛ <span class="highlight-text">التأثيرات السمية غير شائعة</span>' },
+                            { en: 'Heat stable except B1; destroyed by light except niacin; <span class="highlight-text">stable in acid, unstable in alkaline</span>', ar: 'ثابتة للحرارة ما عدا B1؛ تتلف بالضوء ما عدا النياسين؛ <span class="highlight-text">ثابتة في الحمضي، غير ثابتة في القلوي</span>' }
+                        ], 'الخصائص العامة:')
+                    ]
+                },
+                {
+                    title: 'Thiamin (B1) · الثيامين (فيتامين B1)',
+                    cards: [
+                        cardWithItems('Active form and functions:', [
+                            { en: 'Active form: <span class="highlight-text">thiamin pyrophosphate (TPP)</span>', ar: 'الشكل النشط: <span class="highlight-text">ثنائي فوسفات الثيامين (TPP)</span>' },
+                            { en: 'Functions: coenzyme in <span class="highlight-text">decarboxylation, oxidative decarboxylation, transketolase</span>', ar: 'الوظائف: أنزيم مساعد في <span class="highlight-text">نزع الكربوكسيل، نزع الكربوكسيل التأكسدي، الترانسكيتولاز</span>' },
+                            { en: '<span class="highlight-text">Necessary for optimal growth</span> of infants and children; <span class="highlight-text">increases acetyl choline</span> activity at nerve endings', ar: '<span class="highlight-text">ضروري للنمو الأمثل</span> للرضع والأطفال؛ <span class="highlight-text">يزيد نشاط الأسيتيل كولين</span> في النهايات العصبية' }
+                        ], 'الشكل النشط والوظائف:'),
+                        cardWithItems('Deficiency (Beriberi):', [
+                            { en: 'Causes: <span class="highlight-text">polished rice, refined foods, raw fish (thiaminase)</span>', ar: 'الأسباب: <span class="highlight-text">أرز أبيض، أطعمة مكررة، أسماك نيئة (ثياميناز)</span>' },
+                            { en: 'Types: <span class="highlight-text">wet</span> (cardiovascular) and <span class="highlight-text">dry</span> (nervous system)', ar: 'الأنواع: <span class="highlight-text">رطب</span> (قلبي وعائي) و <span class="highlight-text">جاف</span> (عصبي)' }
+                        ], 'النقص (البري بري):')
+                    ]
+                },
+                {
+                    title: 'Riboflavin (B2) · الريبوفلافين (فيتامين B2)',
+                    cards: [
+                        cardWithItems('Active forms and functions:', [
+                            { en: 'Active forms: <span class="highlight-text">FMN, FAD</span> (hydrogen carriers)', ar: 'الشكلان النشطان: <span class="highlight-text">FMN, FAD</span> (حاملات هيدروجين)' },
+                            { en: 'Involved in <span class="highlight-text">oxidation-reduction</span> reactions', ar: 'يشارك في تفاعلات <span class="highlight-text">الأكسدة والاختزال</span>' }
+                        ], 'الشكلان النشطان والوظائف:'),
+                        cardWithItems('Deficiency:', [
+                            { en: 'Manifestation: <span class="highlight-text">angular stomatitis</span> (shiny corners of mouth)', ar: 'المظهر: <span class="highlight-text">التهاب زوايا الفم</span> (لامع)' }
+                        ], 'النقص:')
+                    ]
+                },
+                {
+                    title: 'Niacin (Nicotinic acid, PPF) · النياسين (حمض النيكوتينيك، PPF)',
+                    cards: [
+                        cardWithItems('Sources and functions:', [
+                            { en: 'Can be made from <span class="highlight-text">tryptophan</span> (meat rich)', ar: 'يمكن تصنيعه من <span class="highlight-text">التربتوفان</span> (اللحوم غنية به)' },
+                            { en: 'Coenzymes: <span class="highlight-text">NAD, NADP</span> (hydrogen carriers), <span class="highlight-text">NMN</span> (taurine synthesis, <span class="highlight-text">stimulant to C.N.S</span>, vasodilator, lowers cholesterol)', ar: 'الأنزيمات المساعدة: <span class="highlight-text">NAD, NADP</span> (ناقلات هيدروجين)، <span class="highlight-text">NMN</span> (تخليق التورين، <span class="highlight-text">محفز للجهاز العصبي المركزي</span>، موسع للأوعية، خافض للكوليسترول)' }
+                        ], 'المصادر والوظائف:'),
+                        cardWithItems('Deficiency (Pellagra):', [
+                            { en: 'Causes: deficiency of <span class="highlight-text">niacin or tryptophan</span>; corn-based diet', ar: 'الأسباب: نقص <span class="highlight-text">النياسين أو التربتوفان</span>؛ نظام غذائي قائم على الذرة' },
+                            { en: 'Classic signs: <span class="highlight-text">Dermatitis, Diarrhea, Dementia</span> (3 D\'s)', ar: 'العلامات الكلاسيكية: <span class="highlight-text">التهاب الجلد، إسهال، خرف</span> (ثلاثة D)' }
+                        ], 'النقص (البلاجرا):')
+                    ]
+                },
+                {
+                    title: 'Pyridoxine (B6) · البيريدوكسين (فيتامين B6)',
+                    cards: [
+                        cardWithItems('Chemistry and sources:', [
+                            { en: 'Three forms: <span class="highlight-text">pyridoxine, pyridoxal, pyridoxamine</span>', ar: 'ثلاثة أشكال: <span class="highlight-text">بيريدوكسين، بيريدوكسال، بيريدوكسامين</span>' },
+                            { en: 'Rich source: <span class="highlight-text">royal jelly</span> of bees', ar: 'مصدر غني: <span class="highlight-text">غذاء ملكات النحل</span>' }
+                        ], 'الكيمياء والمصادر:'),
+                        cardWithItems('Functions (PLP):', [
+                            { en: 'Coenzyme for: <span class="highlight-text">transamination, decarboxylation, deamination, desulfuration, synthesis of cysteine from serine and homocysteine</span>', ar: 'أنزيم مساعد لـ: <span class="highlight-text">نقل أميني، نزع كربوكسيل، نزع أمين، إزالة كبريت، تخليق السيستين من السيرين والهوموسيستين</span>' },
+                            { en: 'Required for <span class="highlight-text">heme, GABA, serotonin, niacin synthesis</span>', ar: 'مطلوب لـ <span class="highlight-text">تخليق الهيم، GABA، السيروتونين، النياسين</span>' },
+                            { en: 'Activates <span class="highlight-text">glycogen phosphorylase</span>; <span class="highlight-text">role in amino acid absorption</span> from intestine; required for <span class="highlight-text">synthesis of sphingosine</span>', ar: 'ينشط <span class="highlight-text">فوسفوريلاز الجليكوجين</span>؛ <span class="highlight-text">دور في امتصاص الأحماض الأمينية</span> من الأمعاء؛ مطلوب لـ <span class="highlight-text">تخليق السفينجوزين</span>' }
+                        ], 'الوظائف (PLP):'),
+                        cardWithItems('Deficiency:', [
+                            { en: 'Manifestations: <span class="highlight-text">pellagra-like, growth retardation, convulsions, anemia, demyelination of the peripheral nerves and axons, nausea and vomiting of early pregnancy</span>', ar: 'المظاهر: <span class="highlight-text">شبيه بالبلاجرا، تأخر النمو، تشنجات، أنيميا، إزالة الميالين من الأعصاب الطرفية والمحاور، غثيان وقيء الحمل المبكر</span>' },
+                            { en: 'Causes: low intake, <span class="highlight-text">pregnancy, isoniazid</span> (TB drug)', ar: 'الأسباب: نقص المدخول، <span class="highlight-text">الحمل، أيزونيازيد</span> (دواء السل)' }
+                        ], 'النقص:')
+                    ]
+                },
+                {
+                    title: 'Pantothenic Acid, Biotin, Folic Acid · حمض البانتوثينيك، البيوتين، حمض الفوليك',
+                    cards: [
+                        cardWithItems('Pantothenic acid:', [
+                            { en: 'Sources: <span class="highlight-text">Royal jelly of bees</span>', ar: 'المصادر: <span class="highlight-text">غذاء ملكات النحل</span>' },
+                            { en: 'Active forms: <span class="highlight-text">CoA-SH</span> (carrier for acetyl group), <span class="highlight-text">ACP</span> (acyl carrier protein for fatty acid synthesis)', ar: 'الشكلان النشطان: <span class="highlight-text">CoA-SH</span> (حامل لمجموعة الأسيتيل)، <span class="highlight-text">ACP</span> (بروتين ناقل الأسيل لتخليق الأحماض الدهنية)' },
+                            { en: 'Deficiency is <span class="highlight-text">rare</span> (widely distributed)', ar: 'النقص <span class="highlight-text">نادر</span> (موزع على نطاق واسع)' }
+                        ], 'حمض البانتوثينيك:'),
+                        cardWithItems('Biotin (Vitamin H):', [
+                            { en: 'Sources: <span class="highlight-text">Intestinal bacteria</span>', ar: 'المصادر: <span class="highlight-text">البكتيريا المعوية</span>' },
+                            { en: 'Functions: <span class="highlight-text">carboxylation</span> reactions', ar: 'الوظائف: تفاعلات <span class="highlight-text">الكربوكسيل</span>' },
+                            { en: 'Deficiency causes: <span class="highlight-text">raw egg white (avidin)</span>, antibiotics, sulfa drugs, <span class="highlight-text">deficiency of holocarboxylase synthetase</span> enzyme in children', ar: 'أسباب النقص: <span class="highlight-text">بياض البيض النيئ (أفيدين)</span>، مضادات حيوية، أدوية السلفا، <span class="highlight-text">نقص إنزيم هولوكاربوكسيلاز سينثيتاز</span> في الأطفال' },
+                            { en: 'Manifestations: <span class="highlight-text">dermatitis, hair loss, hallucinations, immune deficiency, growth retardation</span>', ar: 'المظاهر: <span class="highlight-text">التهاب الجلد، فقدان الشعر، هلوسة، نقص المناعة، تأخر النمو</span>' }
+                        ], 'البيوتين (فيتامين H):'),
+                        cardWithItems('Folic acid:', [
+                            { en: 'Function: <span class="highlight-text">carrier for one-carbon groups</span>', ar: 'الوظيفة: <span class="highlight-text">ناقل لمجموعات الكربون الواحد</span>' },
+                            { en: 'Deficiency: <span class="highlight-text">inhibition of DNA synthesis → macrocytic hyperchromic anemia</span>, growth impairment, <span class="highlight-text">fetal malformations (e.g., spina bifida)</span>', ar: 'النقص: <span class="highlight-text">تثبيط تخليق DNA → أنيميا كبيرة الخلايا مفرطة الصباغ</span>، ضعف النمو، <span class="highlight-text">تشوهات الجنين (مثل السنسنة المشقوقة)</span>' },
+                            { en: 'Causes: inadequate intake, <span class="highlight-text">alcoholism, increased demand (e.g., pregnancy)</span>, anticonvulsants', ar: 'الأسباب: نقص المدخول، <span class="highlight-text">إدمان الكحول، زيادة الطلب (مثل الحمل)</span>، مضادات التشنج' }
+                        ], 'حمض الفوليك:')
+                    ]
+                },
+                {
+                    title: 'Vitamin B12 (Cyanocobalamin) · فيتامين B12 (سيانوكوبالامين)',
+                    cards: [
+                        cardWithItems('Sources and storage:', [
+                            { en: 'Sources: <span class="highlight-text">intestinal microorganisms</span>', ar: 'المصادر: <span class="highlight-text">الكائنات الدقيقة في الأمعاء</span>' },
+                            { en: 'Storage: <span class="highlight-text">50-90% in liver</span>; reserve lasts 3-5 years', ar: 'التخزين: <span class="highlight-text">50-90% في الكبد</span>؛ المخزون يكفي 3-5 سنوات' }
+                        ], 'المصادر والتخزين:'),
+                        cardWithItems('Functions and deficiency:', [
+                            { en: 'Functions: <span class="highlight-text">methylation of homocysteine</span> to methionine; isomerization of methylmalonyl-CoA', ar: 'الوظائف: <span class="highlight-text">ميثلة الهوموسيستين</span> إلى ميثيونين؛ أيزومرة ميثيل مالونيل-CoA' },
+                            { en: 'Deficiency causes: <span class="highlight-text">vegetarianism, pernicious anemia</span>', ar: 'أسباب النقص: <span class="highlight-text">النباتية، فقر الدم الخبيث</span>' },
+                            { en: 'Manifestations: <span class="highlight-text">megaloblastic anemia, subacute combined degeneration of spinal cord of lateral (motor) and posterior (sensory) columns, peripheral neuritis</span>', ar: 'المظاهر: <span class="highlight-text">أنيميا الأرومات العملاقة، تنكس مدمج تحت حاد في الحبل الشوكي للأعمدة الجانبية (حركية) والخلفية (حسية)، التهاب الأعصاب المحيطية</span>' }
+                        ], 'الوظائف والنقص:')
+                    ]
+                },
+                {
+                    title: 'Lipoic Acid, Inositol, Choline, PABA · حمض الليبويك، الإينوزيتول، الكولين، PABA',
+                    cards: [
+                        cardWithItems('Lipoic acid:', [
+                            { en: 'Function: <span class="highlight-text">oxidative decarboxylation</span> (like thiamin)', ar: 'الوظيفة: <span class="highlight-text">نزع الكربوكسيل التأكسدي</span> (مثل الثيامين)' }
+                        ], 'حمض الليبويك:'),
+                        cardWithItems('Inositol:', [
+                            { en: 'Functions: <span class="highlight-text">enters phospholipids</span>, <span class="highlight-text">lipotropic factor</span> (prevents fatty liver)', ar: 'الوظائف: <span class="highlight-text">يدخل في الفسفوليبيدات</span>، <span class="highlight-text">عامل شحمي</span> (يمنع الكبد الدهني)' }
+                        ], 'الإينوزيتول:'),
+                        cardWithItems('Choline:', [
+                            { en: 'Functions: <span class="highlight-text">lipotropic</span> action, <span class="highlight-text">acetylcholine</span> formation', ar: 'الوظائف: عمل <span class="highlight-text">شحمي</span>، تكوين <span class="highlight-text">الأسيتيل كولين</span>' }
+                        ], 'الكولين:'),
+                        cardWithItems('PABA:', [
+                            { en: 'Function: <span class="highlight-text">enters folic acid structure</span>', ar: 'الوظيفة: <span class="highlight-text">يدخل في تركيب حمض الفوليك</span>' }
+                        ], 'PABA:')
+                    ]
+                }
+            ]
+        };
+
+        // ================================================================
+        // 2. MINERALS
+        // ================================================================
+        const mineralsData = {
+            titleEn: 'Minerals',
+            titleAr: 'المعادن',
+            slides: [
+                {
+                    title: 'Introduction and Classification · مقدمة وتصنيف',
+                    cards: [
+                        cardWithItems('General:', [
+                            { en: 'Minerals are <span class="highlight-text">essential</span> components of diet, mostly from fruits, vegetables, cereals.', ar: 'المعادن مكونات <span class="highlight-text">أساسية</span> للغذاء، معظمها من الفواكه والخضروات والحبوب.' }
+                        ], 'عام:'),
+                        cardWithItems('Classification by body needs:', [
+                            { en: '<span class="highlight-text">Macro-minerals</span> (>100 mg/day): Ca, P, Mg, Na, K, Cl, S', ar: '<span class="highlight-text">معادن كبيرة</span> (>100 مجم/يوم): Ca, P, Mg, Na, K, Cl, S' },
+                            { en: '<span class="highlight-text">Micro-minerals</span> (<100 mg/day): Fe, Cu, I, F, Zn, Se, Cr, Co, Mn, Mo', ar: '<span class="highlight-text">معادن صغرى</span> (<100 مجم/يوم): Fe, Cu, I, F, Zn, Se, Cr, Co, Mn, Mo' }
+                        ], 'التصنيف حسب احتياجات الجسم:')
+                    ]
+                },
+                {
+                    title: 'Calcium (Ca) · الكالسيوم',
+                    cards: [
+                        cardWithItems('Sources and absorption:', [
+                            { en: 'Sources: <span class="highlight-text">milk, dairy, beans, leafy veg, egg yolk</span>', ar: 'المصادر: <span class="highlight-text">حليب، منتجات ألبان، فاصوليا، خضروات ورقية، صفار بيض</span>' },
+                            { en: 'Absorption: <span class="highlight-text">active transport in upper small intestine</span>', ar: 'الامتصاص: <span class="highlight-text">نقل نشط في الجزء العلوي من الأمعاء الدقيقة</span>' },
+                            { en: 'Regulated by <span class="highlight-text">vitamin D</span> and <span class="highlight-text">PTH</span>', ar: 'ينظمه <span class="highlight-text">فيتامين د</span> و <span class="highlight-text">PTH</span>' }
+                        ], 'المصادر والامتصاص:'),
+                        cardWithItems('Promoters and inhibitors of absorption:', [
+                            { en: 'Promoters: <span class="highlight-text">high protein diet</span> (amino acids form soluble salts), <span class="highlight-text">acidic pH</span>, <span class="highlight-text">lactate</span>', ar: 'المحفزات: <span class="highlight-text">غذاء عالي البروتين</span> (أحماض أمينية تشكل أملاحاً ذائبة)، <span class="highlight-text">pH حمضي</span>، <span class="highlight-text">لاكتات</span>' },
+                            { en: 'Inhibitors: <span class="highlight-text">phosphate, oxalate, phytate</span> (insoluble salts), <span class="highlight-text">alkalinity</span>, free fatty acids (soaps), excess <span class="highlight-text">magnesium</span>', ar: 'المثبطات: <span class="highlight-text">فوسفات، أوكسالات، فيتات</span> (أملاح غير ذائبة)، <span class="highlight-text">قلوية</span>، أحماض دهنية حرة (صابون)، زيادة <span class="highlight-text">المغنيسيوم</span>' }
+                        ], 'محفزات ومثبطات الامتصاص:'),
+                        cardWithItems('Body distribution and blood levels:', [
+                            { en: 'Total body: ~1200 g; <span class="highlight-text">99% in skeleton</span> as <span class="highlight-text">hydroxyapatite</span>; 1% in fluids and tissues', ar: 'الإجمالي: ~1200 غم؛ <span class="highlight-text">99% في الهيكل العظمي</span> كـ <span class="highlight-text">هيدروكسي أباتيت</span>؛ 1% في السوائل والأنسجة' },
+                            { en: 'Blood calcium: <span class="highlight-text">9-11 mg/dL</span> (avg 10)', ar: 'كالسيوم الدم: <span class="highlight-text">9-11 مجم/دل</span> (متوسط 10)' },
+                            { en: 'Forms: <span class="highlight-text">Diffusible</span> (55%: 50% ionized active, 5% complexed), <span class="highlight-text">Non-diffusible</span> (45% bound to albumin)', ar: 'الأشكال: <span class="highlight-text">منتشر</span> (55%: 50% متأين نشط، 5% مرتبط)، <span class="highlight-text">غير منتشر</span> (45% مرتبط بالألبومين)' }
+                        ], 'التوزيع في الجسم ومستويات الدم:')
+                    ]
+                },
+                {
+                    title: 'Calcium Regulation and Functions · تنظيم الكالسيوم ووظائفه',
+                    cards: [
+                        cardWithItems('Hormonal regulation:', [
+                            { en: '<span class="highlight-text">PTH</span>: ↑ blood Ca via bone resorption, intestinal absorption (calcitriol), renal reabsorption', ar: '<span class="highlight-text">PTH</span>: يزيد Ca بالدم عن طريق ارتشاف العظام، الامتصاص المعوي (كالسيتريول)، إعادة الامتصاص الكلوي' },
+                            { en: '<span class="highlight-text">Calcitriol</span>: ↑ blood Ca via intestinal absorption, renal reabsorption, bone mobilization', ar: '<span class="highlight-text">كالسيتريول</span>: يزيد Ca بالدم عن طريق الامتصاص المعوي، إعادة الامتصاص الكلوي، تعبئة العظام' },
+                            { en: '<span class="highlight-text">Calcitonin</span>: ↓ blood Ca via bone deposition, inhibition of osteoclasts, ↑ renal excretion', ar: '<span class="highlight-text">كالسيتونين</span>: يخفض Ca بالدم عن طريق ترسب العظام، تثبيط ناقضات العظم، ↑ الإطراح الكلوي' }
+                        ], 'التنظيم الهرموني:'),
+                        cardWithItems('Other factors and functions:', [
+                            { en: 'Solubility product: <span class="highlight-text">Ca × P in children = 50, adults = 40</span>', ar: 'حاصل الذوبانية: <span class="highlight-text">Ca × P عند الأطفال = 50، البالغين = 40</span>' },
+                            { en: 'Ionization at <span class="highlight-text">pH 7.4</span>; alkalosis decreases ionized Ca; <span class="highlight-text">hypoproteinemia decreases non-diffusible Ca</span>', ar: 'التأين عند <span class="highlight-text">pH 7.4</span>؛ القلوية تقلل Ca المتأين؛ <span class="highlight-text">نقص بروتينات الدم يقلل الكالسيوم غير المنتشر</span>' },
+                            { en: 'Functions: <span class="highlight-text">bone structure, nerve transmission, muscle contraction, blood clotting, enzyme activation</span>', ar: 'الوظائف: <span class="highlight-text">تركيب العظام، نقل الأعصاب، انقباض العضلات، تخثر الدم، تنشيط الإنزيمات</span>' }
+                        ], 'عوامل أخرى ووظائف:'),
+                        cardWithItems('Hypercalcemia and hypocalcemia causes:', [
+                            { en: 'Hypercalcemia: <span class="highlight-text">hyperparathyroidism, malignancy, excess vitamin D, milk-alkali syndrome</span>', ar: 'فرط كالسيوم الدم: <span class="highlight-text">فرط نشاط الجار درقية، خباثة، زيادة فيتامين د، متلازمة الحليب والقلويات</span>' },
+                            { en: 'Hypocalcemia: <span class="highlight-text">hypoparathyroidism, alkalosis, kidney disease, high phosphorus</span>', ar: 'نقص كالسيوم الدم: <span class="highlight-text">قصور الجار درقية، قلوية، أمراض الكلى، ارتفاع الفوسفور</span>' }
+                        ], 'أسباب فرط ونقص كالسيوم الدم:'),
+                        cardWithItems('Excretion and requirements:', [
+                            { en: 'Excretion: <span class="highlight-text">Most in stool</span>; small amount in urine (~200 mg/day)', ar: 'الإطراح: <span class="highlight-text">معظمه في البراز</span>؛ كمية صغيرة في البول (~200 مجم/يوم)' },
+                            { en: 'Requirements: Adults <span class="highlight-text">800 mg/day</span>; Children, pregnant and lactating women <span class="highlight-text">800-1200 mg/day</span>', ar: 'الاحتياجات: البالغين <span class="highlight-text">800 مجم/يوم</span>؛ الأطفال، الحوامل والمرضعات <span class="highlight-text">800-1200 مجم/يوم</span>' }
+                        ], 'الإطراح والاحتياجات:')
+                    ]
+                },
+                {
+                    title: 'Phosphorus (P) · الفوسفور',
+                    cards: [
+                        cardWithItems('Sources, absorption, and distribution:', [
+                            { en: 'Sources: <span class="highlight-text">milk, fish, meat, liver, leafy veg, egg yolk</span>', ar: 'المصادر: <span class="highlight-text">حليب، أسماك، لحوم، كبد، خضروات ورقية، صفار بيض</span>' },
+                            { en: 'Absorption: <span class="highlight-text">active transport in jejunum</span>, regulated by vitamin D', ar: 'الامتصاص: <span class="highlight-text">نقل نشط في الصائم</span>، ينظمه فيتامين د' },
+                            { en: 'Body: ~800 g; <span class="highlight-text">80% in skeleton</span>, 20% in tissues and fluids', ar: 'الجسم: ~800 غم؛ <span class="highlight-text">80% في الهيكل العظمي</span>، 20% في الأنسجة والسوائل' },
+                            { en: 'Plasma levels: adults <span class="highlight-text">2.5-5 mg/dL</span>, children <span class="highlight-text">4-7 mg/dL</span>', ar: 'مستويات البلازما: البالغين <span class="highlight-text">2.5-5 مجم/دل</span>، الأطفال <span class="highlight-text">4-7 مجم/دل</span>' }
+                        ], 'المصادر والامتصاص والتوزيع:'),
+                        cardWithItems('Functions and alterations:', [
+                            { en: 'Functions: <span class="highlight-text">bone and teeth, nucleic acids, coenzymes, high-energy phosphate, phospholipids, phosphoproteins</span>', ar: 'الوظائف: <span class="highlight-text">العظام والأسنان، الأحماض النووية، الأنزيمات المساعدة، الفوسفات عالي الطاقة، الفسفوليبيدات، الفوسفوبروتينات</span>' },
+                            { en: 'Hyperphosphatemia: <span class="highlight-text">renal failure, cell destruction, hypoparathyroidism</span>', ar: 'فرط فوسفات الدم: <span class="highlight-text">فشل كلوي، تدمير خلايا، قصور الجار درقية</span>' },
+                            { en: 'Hypophosphatemia: <span class="highlight-text">hyperparathyroidism, vitamin D deficiency, antacids</span>', ar: 'نقص فوسفات الدم: <span class="highlight-text">فرط نشاط الجار درقية، نقص فيتامين د، مضادات حموضة</span>' }
+                        ], 'الوظائف والاضطرابات:'),
+                        cardWithItems('Excretion and requirements:', [
+                            { en: 'Excretion: <span class="highlight-text">40% in stool, 60% in urine</span>', ar: 'الإطراح: <span class="highlight-text">40% في البراز، 60% في البول</span>' },
+                            { en: 'Requirements: <span class="highlight-text">Same as for calcium</span>', ar: 'الاحتياجات: <span class="highlight-text">مثل الكالسيوم</span>' }
+                        ], 'الإطراح والاحتياجات:')
+                    ]
+                },
+                {
+                    title: 'Sodium (Na) and Potassium (K) · الصوديوم والبوتاسيوم',
+                    cards: [
+                        cardWithItems('Sodium:', [
+                            { en: 'Sources: <span class="highlight-text">table salt, salted foods, meat, eggs</span>', ar: 'المصادر: <span class="highlight-text">ملح الطعام، أطعمة مملحة، لحوم، بيض</span>' },
+                            { en: 'Absorption: <span class="highlight-text">small intestine (ileum)</span>, nearly complete', ar: 'الامتصاص: <span class="highlight-text">الأمعاء الدقيقة (اللفائفي)</span>، شبه كامل' },
+                            { en: 'Body: <span class="highlight-text">2/3 in tissues and fluids</span> (main extracellular cation), 1/3 in skeleton', ar: 'الجسم: <span class="highlight-text">2/3 في الأنسجة والسوائل</span> (الكation الرئيسي خارج الخلايا)، 1/3 في الهيكل العظمي' },
+                            { en: 'Plasma: <span class="highlight-text">137-143 mEq/L</span>; regulated by aldosterone', ar: 'البلازما: <span class="highlight-text">137-143 مكافئ/لتر</span>؛ ينظمه الألدوستيرون' },
+                            { en: 'Functions: <span class="highlight-text">osmotic pressure, nerve transmission, muscle contraction, acid-base balance</span>', ar: 'الوظائف: <span class="highlight-text">الضغط الأسموزي، نقل الأعصاب، انقباض العضلات، توازن الحمض القاعدي</span>' },
+                            { en: 'Excretion: mainly (<span class="highlight-text">95%</span>) in urine and sweat. Requirements: <span class="highlight-text">5 g/day</span> for adults', ar: 'الإطراح: بشكل رئيسي (<span class="highlight-text">95%</span>) في البول والعرق. الاحتياجات: <span class="highlight-text">5 غم/يوم</span> للبالغين' }
+                        ], 'الصوديوم:'),
+                        cardWithItems('Potassium:', [
+                            { en: 'Sources: <span class="highlight-text">vegetables, fruits, nuts</span>', ar: 'المصادر: <span class="highlight-text">خضروات، فواكه، مكسرات</span>' },
+                            { en: 'Absorption: <span class="highlight-text">small intestine</span>', ar: 'الامتصاص: <span class="highlight-text">الأمعاء الدقيقة</span>' },
+                            { en: 'Body: <span class="highlight-text">2/3 in tissues</span> (main intracellular cation), 1/3 in skeleton', ar: 'الجسم: <span class="highlight-text">2/3 في الأنسجة</span> (الكation الرئيسي داخل الخلايا)، 1/3 في الهيكل العظمي' },
+                            { en: 'Plasma: <span class="highlight-text">3.5-5 mmol/L</span>; regulated by aldosterone', ar: 'البلازما: <span class="highlight-text">3.5-5 مليمول/لتر</span>؛ ينظمه الألدوستيرون' },
+                            { en: 'Functions: same as Na plus <span class="highlight-text">intracellular volume</span>', ar: 'الوظائف: نفس الصوديوم بالإضافة إلى <span class="highlight-text">الحجم داخل الخلايا</span>' },
+                            { en: 'Excretion: mainly in urine. Requirements: <span class="highlight-text">4 g/day</span>', ar: 'الإطراح: بشكل رئيسي في البول. الاحتياجات: <span class="highlight-text">4 غم/يوم</span>' }
+                        ], 'البوتاسيوم:'),
+                        cardWithItems('Hyper/Hypo states:', [
+                            { en: 'Hypernatremia: <span class="highlight-text">Cushing, Conn\'s, diabetes insipidus</span>', ar: 'فرط صوديوم الدم: <span class="highlight-text">كوشينغ، كون، السكري الكاذب</span>' },
+                            { en: 'Hyponatremia: <span class="highlight-text">Addison\'s, renal failure, diuretics</span>', ar: 'نقص صوديوم الدم: <span class="highlight-text">أديسون، فشل كلوي، مدرات بول</span>' },
+                            { en: 'Hyperkalemia (>6.5): <span class="highlight-text">Addison\'s, acidosis, renal failure</span>; causes arrhythmias', ar: 'فرط بوتاسيوم (>6.5): <span class="highlight-text">أديسون، حماض، فشل كلوي</span>؛ يسبب اضطرابات نظم' },
+                            { en: 'Hypokalemia: <span class="highlight-text">alkalosis, insulin, vomiting, Cushing, diuretics</span>', ar: 'نقص بوتاسيوم: <span class="highlight-text">قلوية، أنسولين، قيء، كوشينغ، مدرات بول</span>' }
+                        ], 'حالات فرط ونقص:')
+                    ]
+                },
+                {
+                    title: 'Iron (Fe) · الحديد',
+                    cards: [
+                        cardWithItems('Chemistry and general:', [
+                            { en: 'Iron is present in <span class="highlight-text">all cells</span> and does not exist in the free state; always in organic combination with proteins', ar: 'الحديد موجود في <span class="highlight-text">جميع الخلايا</span> ولا يوجد في حالة حرة؛ دائماً في تركيبة عضوية مع البروتينات' },
+                            { en: '<span class="highlight-text">Most dietary iron is in ferric state (Fe³⁺)</span>', ar: '<span class="highlight-text">معظم الحديد الغذائي في حالة حديديك (Fe³⁺)</span>' },
+                            { en: 'Sources: <span class="highlight-text">liver, heart, kidney, egg yolk, fish, nuts, dates, beans</span>', ar: 'المصادر: <span class="highlight-text">كبد، قلب، كلية، صفار بيض، أسماك، مكسرات، تمر، فاصوليا</span>' }
+                        ], 'الكيمياء وعموميات:'),
+                        cardWithItems('Factors affecting absorption:', [
+                            { en: 'Promoters: <span class="highlight-text">cooking, gastric HCl, vitamin C, cysteine, body needs</span>', ar: 'المحفزات: <span class="highlight-text">الطهي، HCl المعدة، فيتامين ج، السيستين، احتياجات الجسم</span>' },
+                            { en: 'Inhibitors: <span class="highlight-text">phosphate, phytate, steatorrhea, alkalies, tea</span>', ar: 'المثبطات: <span class="highlight-text">فوسفات، فيتات، إسهال دهني، قلويات، شاي</span>' }
+                        ], 'العوامل المؤثرة على الامتصاص:'),
+                        cardWithItems('Plasma iron and body distribution:', [
+                            { en: 'Absorbed as <span class="highlight-text">Fe2+</span>, oxidized to Fe3+, bound to <span class="highlight-text">transferrin</span>', ar: 'يُمتص كـ <span class="highlight-text">Fe2+</span>، يتأكسد إلى Fe3+، يرتبط بـ <span class="highlight-text">الترانسفيرين</span>' },
+                            { en: 'Serum iron: men <span class="highlight-text">100-140 µg/dL</span>, women <span class="highlight-text">90-120</span>', ar: 'حديد المصل: رجال <span class="highlight-text">100-140 ميكروغرام/دل</span>، نساء <span class="highlight-text">90-120</span>' },
+                            { en: 'Total body: 3-5 g; <span class="highlight-text">66% in RBCs (Hb)</span>, 33% tissue, 1% plasma', ar: 'الإجمالي: 3-5 غم؛ <span class="highlight-text">66% في كريات الدم الحمراء (Hb)</span>، 33% أنسجة، 1% بلازما' },
+                            { en: 'Storage: <span class="highlight-text">ferritin</span> (main) and <span class="highlight-text">hemosiderin</span>', ar: 'التخزين: <span class="highlight-text">فيريتين</span> (رئيسي) و <span class="highlight-text">هيموسيديرين</span>' },
+                            { en: '<span class="highlight-text">Lactoferrin</span>: binds iron in milk, facilitates transfer to infants, <span class="highlight-text">inhibits microbial growth</span>', ar: '<span class="highlight-text">اللاكتوفيرين</span>: يرتبط بالحديد في الحليب، يسهل النقل للرضع، <span class="highlight-text">يثبط نمو الميكروبات</span>' }
+                        ], 'حديد البلازما وتوزيعه في الجسم:')
+                    ]
+                },
+                {
+                    title: 'Iron Functions, Deficiency, Overload · وظائف الحديد ونقصه وزيادته',
+                    cards: [
+                        cardWithItems('Functions:', [
+                            { en: '<span class="highlight-text">Hemoglobin, myoglobin</span>: O2 and CO2 transport', ar: '<span class="highlight-text">هيموجلوبين، ميوجلوبين</span>: نقل O2 و CO2' },
+                            { en: '<span class="highlight-text">Respiratory cytochromes</span>: oxidative phosphorylation', ar: '<span class="highlight-text">سيتوكرومات تنفسية</span>: فسفرة تأكسدية' },
+                            { en: '<span class="highlight-text">Non-respiratory cytochromes, myeloperoxidase, catalase, tryptophan oxygenase</span>', ar: '<span class="highlight-text">سيتوكرومات غير تنفسية، مايلوبيروكسيداز، كاتالاز، تريبتوفان أوكسيجيناز</span>' }
+                        ], 'الوظائف:'),
+                        cardWithItems('Deficiency anemia:', [
+                            { en: 'Causes: <span class="highlight-text">low intake, malabsorption, blood loss (menstruation, GI, parasites)</span>', ar: 'الأسباب: <span class="highlight-text">نقص المدخول، سوء الامتصاص، فقد الدم (حيض، نزيف معوي، طفيليات)</span>' },
+                            { en: 'Treatment: <span class="highlight-text">ferrous sulfate</span> 200-280 mg 3x/day after meals for 10 weeks', ar: 'العلاج: <span class="highlight-text">كبريتات حديدوز</span> 200-280 مجم 3 مرات/يوم بعد الوجبات لمدة 10 أسابيع' }
+                        ], 'فقر الدم الناتج عن نقص الحديد:'),
+                        cardWithItems('Iron overload and excretion:', [
+                            { en: 'Causes: <span class="highlight-text">repeated transfusion, IV iron, hemochromatosis</span>', ar: 'الأسباب: <span class="highlight-text">نقل دم متكرر، حديد وريدي، داء ترسب الأصبغة الدموية</span>' },
+                            { en: 'Deposits in <span class="highlight-text">liver (cirrhosis), pancreas (diabetes), skin (bronze)</span>', ar: 'يترسب في <span class="highlight-text">الكبد (تليف)، البنكرياس (سكري)، الجلد (برونزي)</span>' },
+                            { en: 'Excretion: mainly in feces (<span class="highlight-text">unabsorbed</span>); urine contains <span class="highlight-text">negligible</span> amounts', ar: 'الإطراح: بشكل رئيسي في البراز (<span class="highlight-text">غير الممتص</span>)؛ البول يحتوي على كميات <span class="highlight-text">ضئيلة</span>' },
+                            { en: 'Requirements: Adults <span class="highlight-text">10 mg/day</span>; Pregnant/lactating <span class="highlight-text">30 mg/day</span>', ar: 'الاحتياجات: البالغين <span class="highlight-text">10 مجم/يوم</span>؛ الحوامل/المرضعات <span class="highlight-text">30 مجم/يوم</span>' }
+                        ], 'زيادة الحديد والإطراح:')
+                    ]
+                },
+                {
+                    title: 'Copper (Cu) · النحاس',
+                    cards: [
+                        cardWithItems('General and sources:', [
+                            { en: 'Copper is a <span class="highlight-text">trace element</span> associated with proteins and certain pigments', ar: 'النحاس هو <span class="highlight-text">عنصر نزر</span> مرتبط بالبروتينات وبعض الأصباغ' },
+                            { en: 'Sources: <span class="highlight-text">nuts, legumes, liver, kidney</span>', ar: 'المصادر: <span class="highlight-text">مكسرات، بقوليات، كبد، كلية</span>' },
+                            { en: 'Absorption: <span class="highlight-text">upper small intestine</span>', ar: 'الامتصاص: <span class="highlight-text">الجزء العلوي من الأمعاء الدقيقة</span>' }
+                        ], 'عموميات ومصادر:'),
+                        cardWithItems('Body distribution and plasma forms:', [
+                            { en: 'Total body: 100-150 mg; <span class="highlight-text">50% in muscles</span>', ar: 'الإجمالي: 100-150 مجم؛ <span class="highlight-text">50% في العضلات</span>' },
+                            { en: 'Plasma: <span class="highlight-text">100 µg/dL</span>; forms: ceruloplasmin (85%), albumin-bound (15%)', ar: 'البلازما: <span class="highlight-text">100 ميكروغرام/دل</span>؛ أشكال: سيرولوبلازمين (85%)، مرتبط بالألبومين (15%)' },
+                            { en: 'In red cells: associated with <span class="highlight-text">superoxide dismutase (erythrocuprin)</span>; constituent of <span class="highlight-text">hemocyanin</span> pigment (oxygen carrier in invertebrates)', ar: 'في كريات الدم الحمراء: مرتبط بـ <span class="highlight-text">ديسموتاز فوق الأكسيد (إريثروكوبرين)</span>؛ مكون من صبغة <span class="highlight-text">الهيموسيانين</span> (ناقل الأكسجين في اللافقاريات)' }
+                        ], 'التوزيع وأشكال البلازما:'),
+                        cardWithItems('Functions and abnormalities:', [
+                            { en: 'Functions: <span class="highlight-text">hemoglobin synthesis, bone formation, myelin maintenance, component of enzymes</span> (cytochrome oxidase, SOD, tyrosinase, lysyl oxidase)', ar: 'الوظائف: <span class="highlight-text">تخليق الهيموجلوبين، تكوين العظام، صيانة الميالين، مكون من إنزيمات</span> (سيتوكروم أوكسيداز، SOD، تيروسيناز، ليسيل أوكسيداز)' },
+                            { en: 'Hypercupremia: <span class="highlight-text">acute/chronic infections</span> (↑ ceruloplasmin)', ar: 'فرط نحاس الدم: <span class="highlight-text">التهابات حادة/مزمنة</span> (↑ سيرولوبلازمين)' },
+                            { en: 'Hypocupremia (Wilson\'s): <span class="highlight-text">accumulation in liver, brain, cornea, kidney</span>', ar: 'نقص نحاس الدم (ويلسون): <span class="highlight-text">تراكم في الكبد، المخ، القرنية، الكلى</span>' }
+                        ], 'الوظائف والاضطرابات:')
+                    ]
+                },
+                {
+                    title: 'Zinc (Zn) and Iodine (I) · الزنك واليود',
+                    cards: [
+                        cardWithItems('Zinc:', [
+                            { en: 'Sources: <span class="highlight-text">meat, liver, eggs, seafood, milk, whole grains</span>', ar: 'المصادر: <span class="highlight-text">لحوم، كبد، بيض، مأكولات بحرية، حليب، حبوب كاملة</span>' },
+                            { en: 'Absorption: <span class="highlight-text">duodenum</span>', ar: 'الامتصاص: <span class="highlight-text">الاثنا عشر</span>' },
+                            { en: 'Body: ~2 g; <span class="highlight-text">20% in skin</span>, rest in skeleton, prostate, etc.', ar: 'الجسم: ~2 غم؛ <span class="highlight-text">20% في الجلد</span>، والباقي في الهيكل العظمي، البروستاتا، إلخ.' },
+                            { en: 'Normal serum zinc: <span class="highlight-text">100-140 µg/dL</span> (may decrease to 60 in liver cirrhosis)', ar: 'الزنك الطبيعي في المصل: <span class="highlight-text">100-140 ميكروغرام/دل</span> (قد ينخفض إلى 60 في تليف الكبد)' },
+                            { en: 'Functions: <span class="highlight-text">growth, reproduction, wound healing, enzyme cofactor, insulin storage, immunostimulant</span>', ar: 'الوظائف: <span class="highlight-text">نمو، تكاثر، التئام جروح، عامل مساعد للإنزيمات، تخزين الأنسولين، محفز للمناعة</span>' },
+                            { en: 'Enzymes containing zinc: <span class="highlight-text">Alkaline phosphatase, Carbonic anhydrase, Superoxide dismutase, Carboxypeptidase, RNA polymerase</span>', ar: 'الإنزيمات المحتوية على الزنك: <span class="highlight-text">فوسفاتاز قلوي، أنهيدراز كربوني، ديسموتاز فوق الأكسيد، كاربوكسي ببتيداز، بوليميراز RNA</span>' },
+                            { en: 'Deficiency: <span class="highlight-text">hypogonadism, poor wound healing, growth retardation, diarrhea, depression</span>', ar: 'النقص: <span class="highlight-text">قصور الغدد التناسلية، ضعف التئام الجروح، تأخر النمو، إسهال، اكتئاب</span>' },
+                            { en: 'Excretion: mainly in feces (<span class="highlight-text">unabsorbed</span>). Requirements: healthy adults <span class="highlight-text">10-20 mg/day</span>', ar: 'الإطراح: بشكل رئيسي في البراز (<span class="highlight-text">غير الممتص</span>). الاحتياجات: البالغين الأصحاء <span class="highlight-text">10-20 مجم/يوم</span>' }
+                        ], 'الزنك:'),
+                        cardWithItems('Iodine:', [
+                            { en: 'Sources: <span class="highlight-text">iodized salt, fish, seafood, weeds</span>', ar: 'المصادر: <span class="highlight-text">ملح معالج باليود، أسماك، مأكولات بحرية، أعشاب بحرية</span>' },
+                            { en: 'Absorption: <span class="highlight-text">small intestine</span>', ar: 'الامتصاص: <span class="highlight-text">الأمعاء الدقيقة</span>' },
+                            { en: 'Body: 25-50 mg; <span class="highlight-text">50% in thyroid</span> as thyroglobulin, 50% as T3/T4', ar: 'الجسم: 25-50 مجم؛ <span class="highlight-text">50% في الدرقية</span> كثر وجلوبولين، 50% كـ T3/T4' },
+                            { en: 'Plasma iodine: <span class="highlight-text">Organic: 4-8 µg/dL</span>, <span class="highlight-text">Inorganic: 1-2 µg/dL</span>', ar: 'اليود في البلازما: <span class="highlight-text">عضوي: 4-8 ميكروغرام/دل</span>، <span class="highlight-text">غير عضوي: 1-2 ميكروغرام/دل</span>' },
+                            { en: 'Function: <span class="highlight-text">thyroid hormone synthesis</span>', ar: 'الوظيفة: <span class="highlight-text">تخليق هرمونات الدرقية</span>' },
+                            { en: 'Deficiency: <span class="highlight-text">hypothyroidism (myxedema/cretinism), goiter</span>', ar: 'النقص: <span class="highlight-text">قصور الدرقية (وذمة مخاطية/قماءة)، دراق</span>' },
+                            { en: 'Excretion: mainly (<span class="highlight-text">70%</span>) in urine. Requirements: Adults <span class="highlight-text">100-150 µg/day</span>', ar: 'الإطراح: بشكل رئيسي (<span class="highlight-text">70%</span>) في البول. الاحتياجات: البالغين <span class="highlight-text">100-150 ميكروغرام/يوم</span>' }
+                        ], 'اليود:')
+                    ]
+                }
+            ]
+        };
+
+        // ================================================================
+        // 3. NUTRITION (UPDATED)
+        // ================================================================
+        const nutritionData = {
+            titleEn: 'Nutrition',
+            titleAr: 'التغذية',
+            slides: [
+                {
+                    title: 'Nutrients and Dietary Reference Intakes · المغذيات والمراجع الغذائية',
+                    cards: [
+                        cardWithItems('Nutrients:', [
+                            { en: 'Substances in food <span class="highlight-text">essential for growth, maintenance, repair</span>', ar: 'مواد في الطعام <span class="highlight-text">أساسية للنمو، الصيانة، الإصلاح</span>' }
+                        ], 'المغذيات:'),
+                        cardWithItems('Types:', [
+                            { en: '<span class="highlight-text">Macronutrients</span>: carbohydrates, proteins, fats (large quantities)', ar: '<span class="highlight-text">مغذيات كبيرة</span>: كربوهيدرات، بروتينات، دهون (كميات كبيرة)' },
+                            { en: '<span class="highlight-text">Micronutrients</span>: vitamins, minerals (small quantities)', ar: '<span class="highlight-text">مغذيات صغيرة</span>: فيتامينات، معادن (كميات صغيرة)' }
+                        ], 'الأنواع:'),
+                        cardWithItems('DRIs:', [
+                            { en: 'Estimates of nutrient amounts to <span class="highlight-text">prevent deficiencies and maintain optimal health <span class="highlight-text">and growth</span></span>', ar: 'تقديرات لكميات المغذيات <span class="highlight-text">لمنع النقص والحفاظ على الصحة المثلى <span class="highlight-text">والنمو</span></span>' },
+                            { en: 'Tolerable Upper Intake Level (UL): <span class="highlight-text">highest safe daily intake</span>', ar: 'الحد الأعلى المسموح به (UL): <span class="highlight-text">أعلى مدخول يومي آمن</span>' }
+                        ], 'المراجع الغذائية:')
+                    ]
+                },
+                {
+                    title: 'Energy Requirements and Macronutrients · احتياجات الطاقة والمغذيات الكبيرة',
+                    cards: [
+                        cardWithItems('Energy requirements:', [
+                            { en: 'Components: <span class="highlight-text">Resting metabolic rate (RMR), physical activity, thermic effect of food (TEF)</span>', ar: 'المكونات: <span class="highlight-text">معدل الأيض أثناء الراحة، النشاط البدني، التأثير الحراري للغذاء</span>' },
+                            { en: '<span class="highlight-text">Sedentary adults:</span> require about <span class="highlight-text">30 kcal/kg/day</span>', ar: '<span class="highlight-text">البالغون المستقرون:</span> يحتاجون حوالي <span class="highlight-text">30 سعرة/كغم/يوم</span>' },
+                            { en: '<span class="highlight-text">Moderately active adults:</span> require about <span class="highlight-text">35 kcal/kg/day</span>', ar: '<span class="highlight-text">البالغون النشطون باعتدال:</span> يحتاجون حوالي <span class="highlight-text">35 سعرة/كغم/يوم</span>' },
+                            { en: '<span class="highlight-text">Very active adults:</span> require about <span class="highlight-text">40 kcal/kg/day</span>', ar: '<span class="highlight-text">البالغون النشطون جداً:</span> يحتاجون حوالي <span class="highlight-text">40 سعرة/كغم/يوم</span>' }
+                        ], 'احتياجات الطاقة:'),
+                        cardWithItems('Energy macronutrients:', [
+                            { en: 'Carbohydrates: <span class="highlight-text">4 kcal/g</span> (1 cal = <span class="highlight-text">4.2 J</span>)', ar: 'الكربوهيدرات: <span class="highlight-text">4 سعرة/غم</span> (1 سعرة = <span class="highlight-text">4.2 جول</span>)' },
+                            { en: 'Proteins: <span class="highlight-text">4 kcal/g</span> (20 amino acids)', ar: 'البروتينات: <span class="highlight-text">4 سعرة/غم</span> (20 حمضاً أمينياً)' },
+                            { en: 'Fats: <span class="highlight-text">9 kcal/g</span>; functions: lubrication, hormone production, vitamin absorption, brain health', ar: 'الدهون: <span class="highlight-text">9 سعرة/غم</span>؛ وظائف: تزليق، إنتاج هرمونات، امتصاص فيتامينات، صحة الدماغ' }
+                        ], 'المغذيات الكبيرة المولدة للطاقة:'),
+                        cardWithItems('Non-energy macronutrients:', [
+                            { en: 'Fiber: <span class="highlight-text">provides bulk, aids digestion</span>', ar: 'الألياف: <span class="highlight-text">توفر الحجم، تساعد الهضم</span>' },
+                            { en: 'Water: <span class="highlight-text">about 70% of the non-fat mass of the human body</span>', ar: 'الماء: <span class="highlight-text">حوالي 70% من كتلة الجسم الخالية من الدهون</span>' }
+                        ], 'المغذيات الكبيرة غير المولدة للطاقة:')
+                    ]
+                },
+                {
+                    title: 'Dietary Fats and Plasma Lipids · الدهون الغذائية ودهون البلازما',
+                    cards: [
+                        cardWithItems('Dietary fats and CHD:', [
+                            { en: 'Elevated plasma lipids increase <span class="highlight-text">risk of coronary heart disease</span>', ar: 'زيادة دهون البلازما تزيد <span class="highlight-text">خطر أمراض القلب التاجية</span>' },
+                            { en: 'Low-density lipoprotein (LDL): <span class="highlight-text">increases</span> the risk of Coronary Heart Disease (CHD)', ar: 'البروتين الدهني منخفض الكثافة (LDL): <span class="highlight-text">يزيد</span> خطر أمراض القلب التاجية (CHD)' },
+                            { en: 'High-density lipoprotein (HDL): <span class="highlight-text">decreases</span> the risk of Coronary Heart Disease (CHD)', ar: 'البروتين الدهني عالي الكثافة (HDL): <span class="highlight-text">يقلل</span> خطر أمراض القلب التاجية (CHD)' }
+                        ], 'الدهون الغذائية وأمراض القلب:'),
+                        cardWithItems('Types of fats:', [
+                            { en: 'Saturated fats: do not contain any double bonds. <span class="highlight-text">↑ LDL-C, ↑ CHD risk</span>', ar: 'الدهون المشبعة: لا تحتوي على أي روابط مزدوجة. <span class="highlight-text">↑ LDL-C، ↑ خطر CHD</span>' },
+                            { en: 'Monounsaturated fats: contains one double bond. <span class="highlight-text">decrease total cholesterol, LDL, TAG; increase HDL</span>', ar: 'الدهون الأحادية غير المشبعة: تحتوي على رابطة مزدوجة واحدة. <span class="highlight-text">تقلل الكوليسترول الكلي، LDL، TAG؛ تزيد HDL</span>' },
+                            { en: 'Polyunsaturated fats: contains more than one double bond (ω-3, ω-6).', ar: 'الدهون المتعددة غير المشبعة: تحتوي على أكثر من رابطة مزدوجة (ω-3, ω-6).' },
+                            { en: 'The Mediterranean diet: Rich in monounsaturated and polyunsaturated fatty acids, low in saturated fat, contains fresh food. <span class="highlight-text">Decreases total cholesterol and LDL, increases HDL</span>.', ar: 'حمية البحر الأبيض المتوسط: غنية بالأحماض الدهنية أحادية ومتعددة عدم الإشباع، منخفضة الدهون المشبعة، تحتوي على طعام طازج. <span class="highlight-text">تقلل الكوليسترول الكلي و LDL، وتزيد HDL</span>.' },
+                            { en: 'Trans fats: <span class="highlight-text">↑ LDL-C, ↑ CHD risk</span> (hydrogenated oils)', ar: 'الدهون المتحولة: <span class="highlight-text">↑ LDL-C، ↑ خطر CHD</span> (زيوت مهدرجة)' }
+                        ], 'أنواع الدهون:'),
+                        cardWithItems('Dietary cholesterol:', [
+                            { en: 'Found only in <span class="highlight-text">animal products</span>; <span class="highlight-text">limit to ≤300 mg/day</span>', ar: 'توجد فقط في <span class="highlight-text">المنتجات الحيوانية</span>؛ <span class="highlight-text">الحد ≤300 مجم/يوم</span>' }
+                        ], 'الكوليسترول الغذائي:')
+                    ]
+                },
+                {
+                    title: 'Net Cholesterol Balance and Functions · توازن الكوليسترول ووظائفه',
+                    cards: [
+                        cardWithItems('Sources of cholesterol:', [
+                            { en: 'Endogenous: <span class="highlight-text">de novo synthesis (liver), LDL, HDL, chylomicron remnants</span>', ar: 'داخلي: <span class="highlight-text">تخليق من جديد (كبد)، LDL، HDL، بقايا الكيلوميكرونات</span>' },
+                            { en: 'Exogenous: <span class="highlight-text">dietary cholesterol (~300 mg/day)</span>', ar: 'خارجي: <span class="highlight-text">الكوليسترول الغذائي (~300 مجم/يوم)</span>' }
+                        ], 'مصادر الكوليسترول:'),
+                        cardWithItems('Functions and balance:', [
+                            { en: 'Functions: <span class="highlight-text">cell membrane, bile acids, vitamin D, steroid hormones, used by nerve cells (myelin sheath)</span>', ar: 'الوظائف: <span class="highlight-text">غشاء الخلية، أحماض صفراوية، فيتامين د، هرمونات ستيرويدية، تستخدمه الخلايا العصبية (الغلاف المياليني)</span>' },
+                            { en: 'Balance: dietary 300 mg + synthesized 900 mg → <span class="highlight-text">synthesized and degraded in the liver (to bile acids)</span>', ar: 'التوازن: غذائي 300 مجم + مُصنع 900 مجم → <span class="highlight-text">يُصنع ويُحلل في الكبد (إلى أحماض صفراوية)</span>' }
+                        ], 'الوظائف والتوازن:')
+                    ]
+                },
+                {
+                    title: 'Dietary Carbohydrates · الكربوهيدرات الغذائية',
+                    cards: [
+                        cardWithItems('Types and simple sugars:', [
+                            { en: 'Primary role: <span class="highlight-text">energy provision</span>; excess leads to obesity', ar: 'الدور الأساسي: <span class="highlight-text">توفير الطاقة</span>؛ الإفراط يؤدي للسمنة' },
+                            { en: 'Simple sugars: <span class="highlight-text">Glucose</span> is abundant in fruits, <span class="highlight-text">Fructose</span> in fruits, <span class="highlight-text">Sucrose</span> in honey, <span class="highlight-text">Lactose</span> in milk.', ar: 'السكريات البسيطة: <span class="highlight-text">الجلوكوز</span> وفير في الفواكه، <span class="highlight-text">الفركتوز</span> في الفواكه، <span class="highlight-text">السكروز</span> في العسل، <span class="highlight-text">اللاكتوز</span> في الحليب.' },
+                            { en: 'Complex: <span class="highlight-text">Starch</span> is abundant in plants, wheat, and potatoes; also <span class="highlight-text">fiber</span>.', ar: 'المعقدة: <span class="highlight-text">النشا</span> وفير في النباتات والقمح والبطاطس؛ وأيضاً <span class="highlight-text">الألياف</span>.' }
+                        ], 'الأنواع والسكريات البسيطة:'),
+                        cardWithItems('Fiber actions and recommendations:', [
+                            { en: 'Dietary fiber is defined as the <span class="highlight-text">nondigestible, nonstarch, noncarbohydrate polymer</span> present intact in plants.', ar: 'تعرف الألياف الغذائية بأنها <span class="highlight-text">البوليمر غير القابل للهضم، غير النشوي، وغير الكربوهيدراتي</span> الموجود سليماً في النباتات.' },
+                            { en: 'Actions: <span class="highlight-text">Absorbs 10-15 times its own weight in water</span>, increasing bowel motility and promoting normal laxation.', ar: 'الأفعال: <span class="highlight-text">تمتص 10-15 ضعف وزنها من الماء</span>، وتزيد حركة الأمعاء وتعزز التبرز الطبيعي.' },
+                            { en: 'Soluble fiber <span class="highlight-text">delays gastric emptying</span>, resulting in a sensation of fullness and reduced peaks of blood glucose following a meal.', ar: 'الألياف القابلة للذوبان <span class="highlight-text">تؤخر إفراغ المعدة</span>، مما يؤدي إلى الشعور بالشبع وتقليل ذروة الجلوكوز في الدم بعد الوجبة.' },
+                            { en: '<span class="highlight-text">Lowers LDL-C levels</span> and reduces the risk for CHD.', ar: '<span class="highlight-text">تخفض مستويات LDL-C</span> وتقلل خطر الإصابة بأمراض القلب التاجية.' },
+                            { en: 'Fiber-rich diets <span class="highlight-text">decrease the risk for constipation, hemorrhoids, and diverticulosis</span>.', ar: 'الأنظمة الغذائية الغنية بالألياف <span class="highlight-text">تقلل خطر الإمساك والبواسير والرتوج</span>.' }
+                        ], 'أفعال الألياف وتوصياتها:')
+                    ]
+                },
+                {
+                    title: 'Glycemic Index and Carbohydrate Requirements · المؤشر الجلايسيمي واحتياجات الكربوهيدرات',
+                    cards: [
+                        cardWithItems('Glycemic index (GI):', [
+                            { en: 'Some carbohydrate-rich foods <span class="highlight-text">produce a rapid rise in blood glucose concentration</span>.', ar: 'بعض الأطعمة الغنية بالكربوهيدرات <span class="highlight-text">تسبب ارتفاعاً سريعاً في تركيز الجلوكوز في الدم</span>.' },
+                            { en: 'GI is defined as the <span class="highlight-text">area under the blood glucose curves</span> seen after ingestion of a meal with carbohydrate-rich food, compared to glucose or white bread.', ar: 'يعرف GI بأنه <span class="highlight-text">المساحة تحت منحنيات الجلوكوز في الدم</span> التي تُرى بعد تناول وجبة غنية بالكربوهيدرات، مقارنة بالجلوكوز أو الخبز الأبيض.' },
+                            { en: 'Low-GI diet <span class="highlight-text">improves glycemic control in diabetics</span>.', ar: 'نظام غذائي منخفض GI <span class="highlight-text">يحسن التحكم في الجلوكوز لدى مرضى السكري</span>.' }
+                        ], 'المؤشر الجلايسيمي:'),
+                        cardWithItems('Requirements and disease:', [
+                            { en: 'Insufficient carbs → <span class="highlight-text">ketone body production, protein breakdown</span>', ar: 'نقص الكربوهيدرات → <span class="highlight-text">إنتاج أجسام كيتونية، تحلل بروتين</span>' },
+                            { en: '<span class="highlight-text">Most amino acids can be converted into glucose</span>.', ar: '<span class="highlight-text">يمكن تحويل معظم الأحماض الأمينية إلى جلوكوز</span>.' },
+                            { en: 'There is <span class="highlight-text">no direct evidence</span> that consumption of simple sugars is harmful. Diets high in sucrose <span class="highlight-text">do not lead to diabetes or hypoglycemia</span>.', ar: '<span class="highlight-text">لا يوجد دليل مباشر</span> على أن استهلاك السكريات البسيطة ضار. الأنظمة الغذائية الغنية بالسكروز <span class="highlight-text">لا تؤدي إلى السكري أو نقص سكر الدم</span>.' },
+                            { en: 'Sucrose consumption associated with <span class="highlight-text">dental caries</span>; fluoride helps', ar: 'استهلاك السكروز مرتبط بـ <span class="highlight-text">تسوس الأسنان</span>؛ الفلورايد يساعد' }
+                        ], 'الاحتياجات والأمراض:')
+                    ]
+                },
+                {
+                    title: 'Dietary Protein · البروتين الغذائي',
+                    cards: [
+                        cardWithItems('Quality of proteins:', [
+                            { en: 'Animal sources (meat, poultry, milk, fish) have <span class="highlight-text">high quality</span> (all essential amino acids)', ar: 'المصادر الحيوانية (لحوم، دواجن، حليب، أسماك) ذات <span class="highlight-text">جودة عالية</span> (كل الأحماض الأمينية الأساسية)' },
+                            { en: 'Plant sources have <span class="highlight-text">lower quality</span>; can be combined (e.g., wheat + beans) for better biologic value', ar: 'المصادر النباتية ذات <span class="highlight-text">جودة أقل</span>؛ يمكن دمجها (مثل قمح + فاصوليا) لقيمة بيولوجية أفضل' }
+                        ], 'جودة البروتينات:')
+                    ]
+                }
+            ]
+        };
+
+        // ================================================================
+        // 4. PROTEIN METABOLISM (UPDATED)
+        // ================================================================
+        const proteinData = {
+            titleEn: 'Protein Metabolism',
+            titleAr: 'أيض البروتين',
+            slides: [
+                {
+                    title: 'Dietary Protein and Nitrogen Balance · البروتين الغذائي وتوازن النيتروجين',
+                    cards: [
+                        cardWithItems('Nitrogen balance:', [
+                            { en: 'It occurs when the amount of nitrogen consumed <span class="highlight-text">equals</span> that of the nitrogen excreted in the urine, sweat, and feces.', ar: 'يحدث عندما تكون كمية النيتروجين المستهلكة <span class="highlight-text">مساوية</span> للنيتروجين المطروح في البول والعرق والبراز.' },
+                            { en: 'Positive: <span class="highlight-text">intake > excretion</span> (growth, pregnancy, recovery)', ar: 'موجب: <span class="highlight-text">مدخول > طرح</span> (نمو، حمل، نقاهة)' },
+                            { en: 'Negative: <span class="highlight-text">excretion > intake</span> (trauma, burns, illness, surgery)', ar: 'سالب: <span class="highlight-text">طرح > مدخول</span> (رضح، حروق، مرض، جراحة)' }
+                        ], 'توازن النيتروجين:'),
+                        cardWithItems('Requirements and excess:', [
+                            { en: 'RDA: <span class="highlight-text">0.8 g/kg/day</span> for adults (e.g., 56 g for 70 kg)', ar: 'الكمية الموصى بها: <span class="highlight-text">0.8 غم/كغم/يوم</span> للبالغين (مثال: 56 غم لـ 70 كغم)' },
+                            { en: 'Athletes: ~1 g/kg; pregnancy/lactation: +30 g/day; infants: 2 g/kg/day', ar: 'الرياضيون: ~1 غم/كغم؛ الحمل/الرضاعة: +30 غم/يوم؛ الرضع: 2 غم/كغم/يوم' },
+                            { en: 'Excess protein: <span class="highlight-text">no physiologic advantage; eliminated as urinary nitrogen</span>', ar: 'البروتين الزائد: <span class="highlight-text">لا فائدة فسيولوجية؛ يُطرح كنيتروجين بول</span>' }
+                        ], 'الاحتياجات والزيادة:'),
+                        cardWithItems('Protein-sparing effect of carbohydrate:', [
+                            { en: 'Low carb intake → <span class="highlight-text">amino acids deaminated for gluconeogenesis</span>', ar: 'انخفاض الكربوهيدرات → <span class="highlight-text">نزع أمين الأحماض الأمينية لتكوين الجلوكوز</span>' }
+                        ], 'التأثير الموفر للبروتين للكربوهيدرات:')
+                    ]
+                },
+                {
+                    title: 'Protein-Energy Malnutrition (PEM) · سوء التغذية بالبروتين والطاقة',
+                    cards: [
+                        cardWithItems('PEM overview:', [
+                            { en: 'In developed countries: seen in <span class="highlight-text">hospitalized patients</span> with trauma/infection', ar: 'في البلدان المتقدمة: يُرى في <span class="highlight-text">المرضى المنومين</span> بسبب رضح/عدوى' },
+                            { en: 'In developing countries: <span class="highlight-text">inadequate intake</span> of protein and/or energy. <span class="highlight-text">Death from secondary infection is common</span>.', ar: 'في البلدان النامية: <span class="highlight-text">مدخول غير كاف</span> من البروتين و/أو الطاقة. <span class="highlight-text">الموت من العدوى الثانوية شائع</span>.' }
+                        ], 'نظرة عامة على PEM:'),
+                        // ===== KWASHIORKOR =====
+                        cardWithItems('Kwashiorkor:', [
+                            { en: 'Protein deprivation is <span class="highlight-text">greater</span> than calorie reduction.', ar: 'الحرمان من البروتين <span class="highlight-text">أكبر</span> من نقص السعرات.' },
+                            { en: 'Commonly seen in developing countries in children <span class="highlight-text">after weaning</span> at about age 1 year.', ar: 'شائع في البلدان النامية في الأطفال <span class="highlight-text">بعد الفطام</span> في حوالي عمر سنة.' },
+                            { en: '<span class="highlight-text">Symptoms:</span> Stunted growth, Skin lesions, Depigmented hair, Anorexia, Enlarged fatty liver, Edema, Decreased serum albumin concentration.', ar: '<span class="highlight-text">الأعراض:</span> توقف النمو، آفات جلدية، شعر منزوع الصبغة، فقدان الشهية، تضخم الكبد الدهني، وذمة، انخفاض تركيز ألبومين المصل.' }
+                        ], 'كواشيوركور:'),
+                        // ===== MARASMUS =====
+                        cardWithItems('Marasmus:', [
+                            { en: 'Calorie deprivation is <span class="highlight-text">greater</span> than protein reduction.', ar: 'نقص السعرات <span class="highlight-text">أكبر</span> من نقص البروتين.' },
+                            { en: 'Usually occurs in developing countries in children <span class="highlight-text">younger than age 1 year</span>.', ar: 'يحدث عادةً في البلدان النامية في الأطفال <span class="highlight-text">الأصغر من سنة</span>.' },
+                            { en: '<span class="highlight-text">Symptoms:</span> Arrested growth, Extreme muscle wasting, Loss of subcutaneous fat, Weakness, Anemia.', ar: '<span class="highlight-text">الأعراض:</span> توقف النمو، هزال عضلي شديد، فقدان الدهون تحت الجلد، ضعف، أنيميا.' }
+                        ], 'ماراسموس:'),
+                        // ===== DETAILED TABLE (KEPT) =====
+                        tableCard(
+                            '📊 Detailed Comparison of Kwashiorkor and Marasmus · مقارنة تفصيلية بين كواشيوركور وماراسموس',
+                            `
+                            <table class="info-table">
+                                <thead><tr>
+                                    <th>${cell('Feature', 'الخاصية')}</th>
+                                    <th>${cell('Kwashiorkor', 'كواشيوركور')}</th>
+                                    <th>${cell('Marasmus', 'ماراسموس')}</th>
+                                </tr></thead>
+                                <tbody>
+                                    <tr><td>${cell('Age of onset', 'عمر البداية')}</td>
+                                        <td>${cell('6 months - 3 years', '٦ شهور - ٣ سنوات')}</td>
+                                        <td>${cell('Under 1 year', 'أقل من سنة')}</td></tr>
+                                    <tr><td>${cell('Subcutaneous fat', 'الدهون تحت الجلد')}</td>
+                                        <td>${cell('Preserved', 'محفوظة')}</td>
+                                        <td>${cell('Not preserved', 'غير محفوظة')}</td></tr>
+                                    <tr><td>${cell('Edema', 'الوذمة')}</td>
+                                        <td>${cell('Present', 'موجودة')}</td>
+                                        <td>${cell('Absent', 'غائبة')}</td></tr>
+                                    <tr><td>${cell('Fatty liver', 'الكبد الدهني')}</td>
+                                        <td>${cell('Enlarged fatty liver', 'كبد دهني متضخم')}</td>
+                                        <td>${cell('No fatty liver', 'لا يوجد كبد دهني')}</td></tr>
+                                    <tr><td>${cell('Ribs', 'الأضلاع')}</td>
+                                        <td>${cell('Not very prominent', 'ليست بارزة جداً')}</td>
+                                        <td>${cell('Very prominent', 'بارزة جداً')}</td></tr>
+                                    <tr><td>${cell('Mental state', 'الحالة النفسية')}</td>
+                                        <td>${cell('Lethargic', 'خمول')}</td>
+                                        <td>${cell('Alert and irritable', 'يقظ وسريع الانفعال')}</td></tr>
+                                    <tr><td>${cell('Muscle wasting', 'هزال العضلات')}</td>
+                                        <td>${cell('Mild or absent', 'خفيف أو غائب')}</td>
+                                        <td>${cell('Severe', 'شديد')}</td></tr>
+                                    <tr><td>${cell('Appetite', 'الشهية')}</td>
+                                        <td>${cell('Poor', 'ضعيفة')}</td>
+                                        <td>${cell('Voracious', 'نهم')}</td></tr>
+                                    <tr><td>${cell('Treatment needs', 'العلاج يحتاج')}</td>
+                                        <td>${cell('Adequate proteins', 'بروتينات كافية')}</td>
+                                        <td>${cell('Adequate protein, fats and carbohydrates', 'بروتين ودهون وكربوهيدرات كافية')}</td></tr>
+                                </tbody>
+                            </table>
+                            `,
+                            'مقارنة تفصيلية بين كواشيوركور وماراسموس'
+                        )
+                    ]
+                }
+            ]
+        };
+
+        // ================================================================
+        // 5. THERAPEUTIC DIET
+        // ================================================================
+        const therapeuticData = {
+            titleEn: 'Therapeutic Diet',
+            titleAr: 'النظام الغذائي العلاجي',
+            slides: [
+                {
+                    title: 'Definition and Methods · تعريف وطرق',
+                    cards: [
+                        cardWithItems('Definition:', [
+                            { en: 'Use of diet as a <span class="highlight-text">therapeutic tool</span> in disease management', ar: 'استخدام النظام الغذائي كـ <span class="highlight-text">أداة علاجية</span> في إدارة الأمراض' }
+                        ], 'التعريف:'),
+                        cardWithItems('Special feeding methods:', [
+                            { en: 'Oral feeding', ar: 'التغذية الفموية' },
+                            { en: 'Nasogastric feeding', ar: 'التغذية الأنفية المعدية' },
+                            { en: 'Gastrostomy or jejunostomy', ar: 'التغذية عبر فتحة المعدة أو الصائم' },
+                            { en: 'Intravenous feeding', ar: 'التغذية الوريدية' }
+                        ], 'طرق التغذية الخاصة:')
+                    ]
+                },
+                {
+                    title: 'Symptoms Relieved by Dietary Modifications · الأعراض التي تخفف بالتعديلات الغذائية',
+                    cards: [
+                        tableCard(
+                            'Symptoms and Recommendations · الأعراض والتوصيات',
+                            `
+                            <table class="info-table">
+                                <thead><tr><th>${cell('Symptom', 'العرض')}</th><th>${cell('Recommendations', 'التوصيات')}</th></tr></thead>
+                                <tbody>
+                                    <tr><td>${cell('Dysphagia, Dyspepsia, Nausea', 'عسر البلع، عسر الهضم، غثيان')}</td><td>${cell('Semifluid, bland diet', 'نظام شبه سائل، لطيف')}</td></tr>
+                                    <tr><td>${cell('Chronic constipation, diarrhea', 'إمساك مزمن، إسهال مزمن')}</td><td>${cell('High fiber, bland, high energy', 'ألياف عالية، لطيف، طاقة عالية')}</td></tr>
+                                </tbody>
+                            </table>
+                            `,
+                            'الأعراض والتوصيات'
+                        )
+                    ]
+                },
+                {
+                    title: 'Gastrointestinal Tract Diseases · أمراض الجهاز الهضمي',
+                    cards: [
+                        cardWithItems('Peptic ulcer (bland diet):', [
+                            { en: 'Soft, <span class="highlight-text">small frequent meals</span>, avoid spices, smoking, alcohol, coffee', ar: 'طعام طري، <span class="highlight-text">وجبات صغيرة متكررة</span>، تجنب البهارات، التدخين، الكحول، القهوة' }
+                        ], 'القرحة الهضمية (نظام لطيف):'),
+                        cardWithItems('Diarrhea:', [
+                            { en: 'Correct water and electrolytes with <span class="highlight-text">oral rehydration solution</span>; 2-hourly diluted milk; later broth, fruits, jelly', ar: 'تصحيح الماء والكهارل بـ <span class="highlight-text">محلول معالجة الجفاف الفموي</span>؛ حليب مخفف كل ساعتين؛ لاحقاً مرق، فواكه، جيلي' }
+                        ], 'الإسهال:')
+                    ]
+                },
+                {
+                    title: 'Liver, Biliary Tract and Pancreas Diseases · أمراض الكبد والقنوات الصفراوية والبنكرياس',
+                    cards: [
+                        cardWithItems('Acute hepatitis:', [
+                            { en: 'Several small meals, <span class="highlight-text">restrict fat if jaundice</span>, avoid alcohol/spices/fried foods, adequate fruits/veg', ar: 'وجبات صغيرة متعددة، <span class="highlight-text">تقييد الدهون إذا كان اليرقان شديداً</span>، تجنب الكحول/البهارات/المقليات، فواكه/خضروات كافية' }
+                        ], 'التهاب الكبد الحاد:'),
+                        cardWithItems('Acute cholecystitis:', [
+                            { en: '<span class="highlight-text">Fluid diet</span> 2-3 L/day, small feeds, exclude fat; later clear soups, milk, cereals', ar: '<span class="highlight-text">نظام سائل</span> 2-3 لتر/يوم، وجبات صغيرة، استبعاد الدهون؛ لاحقاً شوربات صافية، حليب، حبوب' }
+                        ], 'التهاب المرارة الحاد:')
+                    ]
+                },
+                {
+                    title: 'Cardiovascular Diseases · أمراض القلب والأوعية الدموية',
+                    cards: [
+                        cardWithItems('Hypertension:', [
+                            { en: 'If overweight, <span class="highlight-text">dietary restriction</span> lowers BP; <span class="highlight-text">salt restriction</span>, relaxation', ar: 'إذا كان يعاني من زيادة الوزن، <span class="highlight-text">التقييد الغذائي</span> يخفض الضغط؛ <span class="highlight-text">تقييد الملح</span>، استرخاء' }
+                        ], 'ارتفاع ضغط الدم:'),
+                        cardWithItems('Heart failure:', [
+                            { en: '<span class="highlight-text">Low sodium diet</span>, no fluid restriction (1.5-2 L/day), small easily digestible meals, potassium supplement if diuretic', ar: '<span class="highlight-text">نظام منخفض الصوديوم</span>، لا تقييد للسوائل (1.5-2 لتر/يوم)، وجبات صغيرة سهلة الهضم، مكمل بوتاسيوم إذا كان مدر بول' }
+                        ], 'فشل القلب:')
+                    ]
+                },
+                {
+                    title: 'Kidney and Urinary Tract Diseases · أمراض الكلى والجهاز البولي',
+                    cards: [
+                        cardWithItems('Acute glomerulonephritis:', [
+                            { en: 'Restrict fluids to <span class="highlight-text">urine volume + 500 ml</span>, restrict sodium (40-60 mmol/day), restrict protein to 40 g/day if urea high', ar: 'تقييد السوائل إلى <span class="highlight-text">حجم البول + 500 مل</span>، تقييد الصوديوم (40-60 مليمول/يوم)، تقييد البروتين إلى 40 غم/يوم إذا كان اليوريا مرتفعاً' }
+                        ], 'التهاب الكبيبات الحاد:'),
+                        cardWithItems('Renal calculus:', [
+                            { en: 'Drink <span class="highlight-text">2-5 L urine/day</span>, reduce purine for uric acid stones', ar: 'شرب <span class="highlight-text">2-5 لتر بول/يوم</span>، تقليل البيورينات لحصوات حمض اليوريك' }
+                        ], 'حصوات الكلى:')
+                    ]
+                },
+                {
+                    title: 'Burns and Diabetes · الحروق ومرض السكري',
+                    cards: [
+                        cardWithItems('Burns:', [
+                            { en: '<span class="highlight-text">High calorie and high protein</span> diet; ample fluids, milk shakes, cream soups frequently', ar: 'نظام <span class="highlight-text">عالي السعرات وعالي البروتين</span>؛ سوائل وفيرة، مخفوق حليب، شوربات كريمية متكررة' }
+                        ], 'الحروق:'),
+                        cardWithItems('Type I diabetes:', [
+                            { en: '<span class="highlight-text">Regular meal pattern</span> matched to insulin; avoid fasting/missing meals', ar: '<span class="highlight-text">نمط وجبات منتظم</span> متناسب مع الأنسولين؛ تجنب الصيام/تفويت وجبة' }
+                        ], 'السكري النوع الأول:'),
+                        cardWithItems('Type II diabetes:', [
+                            { en: 'Obese patients: <span class="highlight-text">restrict energy</span> to maintain ideal weight', ar: 'المرضى البدينون: <span class="highlight-text">تقييد الطاقة</span> للحفاظ على الوزن المثالي' }
+                        ], 'السكري النوع الثاني:'),
+                        cardWithItems('General diabetic diet:', [
+                            { en: 'Energy proportions: <span class="highlight-text">carbs 50-55%, protein 10-15%, fat <35%</span>', ar: 'نسب الطاقة: <span class="highlight-text">كربوهيدرات 50-55%، بروتين 10-15%، دهون <35%</span>' }
+                        ], 'النظام الغذائي العام لمرضى السكري:')
+                    ]
+                }
+            ]
+        };
+
+        // ================================================================
+        //  BUILD SECTIONS — ORDER: 1.Vitamins, 2.Minerals, 3.Nutrition, 4.Protein, 5.Therapeutic
+        // ================================================================
+        const slidesData = {
+            vitamins: vitaminsData,
+            minerals: mineralsData,
+            nutrition: nutritionData,
+            protein: proteinData,
+            therapeutic: therapeuticData
+        };
+
+        const sectionOrder = ['vitamins', 'minerals', 'nutrition', 'protein', 'therapeutic'];
+
+        function renderSlideContent(slide) {
+            if (slide.cards && Array.isArray(slide.cards)) {
+                const cardsHTML = slide.cards.join('');
+                return createSlideHTML(slide.title, cardsHTML);
+            }
+            return createSlideHTML(slide.title, '');
+        }
+
+        function buildApp() {
+            const tabsContainer = document.getElementById('tabsContainer');
+            const sectionsContainer = document.getElementById('sectionsContainer');
+
+            sectionOrder.forEach((secId, idx) => {
+                const sec = slidesData[secId];
+                if (!sec) return;
+
+                const tab = document.createElement('button');
+                tab.className = 'tab-btn' + (idx === 0 ? ' active' : '');
+                tab.dataset.idx = idx;
+                tab.innerHTML = `<span class="en">${sec.titleEn}</span><span class="ar">${sec.titleAr}</span>`;
+                tab.onclick = () => switchSection(idx);
+                tabsContainer.appendChild(tab);
+
+                const card = document.createElement('div');
+                card.className = 'card' + (idx === 0 ? ' active' : '');
+                card.dataset.idx = idx;
+                card.id = `section-${secId}`;
+
+                const slidesHTML = sec.slides.map(s => renderSlideContent(s)).join('');
+                const totalSlides = sec.slides.length;
+
+                const cardHTML = `
+                        <h2><i class="fas fa-layer-group"></i> ${sec.titleEn} · ${sec.titleAr}</h2>
+                        <div class="slide-container" id="slideContainer-${secId}">
+                            <div class="slide-progress">
+                                <span style="font-weight:600;">التقدم</span>
+                                <div class="bar"><div class="fill" style="width:0%;"></div></div>
+                                <span class="count">1 / ${totalSlides}</span>
+                            </div>
+                            ${slidesHTML}
+                            <div class="slide-nav">
+                                <button class="btn-nav prev" onclick="goToSlide('${secId}', 'slideContainer-${secId}', slideState['${secId}'].current - 1)">السابق</button>
+                                <button class="btn-nav next primary" onclick="goToSlide('${secId}', 'slideContainer-${secId}', slideState['${secId}'].current + 1)">التالي</button>
+                            </div>
+                        </div>
+                    `;
+                card.innerHTML = cardHTML;
+                sectionsContainer.appendChild(card);
+
+                initSlideState(secId, totalSlides);
+                setTimeout(() => renderSlide(secId, `slideContainer-${secId}`), 50);
+            });
+        }
+
+        function switchSection(idx) {
+            const secId = sectionOrder[idx];
+            document.querySelectorAll('.tab-btn').forEach((tab, i) => tab.classList.toggle('active', i === idx));
+            document.querySelectorAll('.card').forEach((card, i) => card.classList.toggle('active', i === idx));
+            if (secId && slideState[secId]) {
+                slideState[secId].current = 0;
+                setTimeout(() => renderSlide(secId, `slideContainer-${secId}`), 50);
+            }
+        }
+
+        // ================================================================
+        //  INIT
+        // ================================================================
+        applyTheme(localStorage.getItem('theme') || 'dark');
+        buildApp();
+
+        window.goToSlide = goToSlide;
+        window.slideState = slideState;
+        window.switchSection = switchSection;
+        window.toggleTheme = toggleTheme;
+        window.toggleCardTranslation = toggleCardTranslation;
+    </script>
+</body>
+</html>
